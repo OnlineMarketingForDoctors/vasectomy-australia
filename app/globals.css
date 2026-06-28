@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+/* Variable fonts are self-hosted via Fontsource and imported in app/layout.tsx
+   (no external font CDN dependency). */
+
+@theme {
+  /* Palette — warm editorial neutrals with a deep clinical teal + clay accent */
+  --color-bone: #f5f1e9;
+  --color-paper: #fbf9f4;
+  --color-ink: #1a1916;
+  --color-ink-soft: #57534a;
+  --color-line: #e2dbcd;
+  --color-sand: #ece5d7;
+  --color-teal: #11514a;
+  --color-teal-deep: #0b332e;
+  --color-teal-bright: #1c6f64;
+  --color-clay: #bd6038;
+  --color-clay-soft: #d98a5f;
+
+  /* Typography */
+  --font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter Variable", system-ui, -apple-system, sans-serif;
+
+  /* Editorial display scale */
+  --text-mega: clamp(3rem, 8.5vw, 7.25rem);
+  --text-display: clamp(2.5rem, 6vw, 5rem);
+  --text-headline: clamp(2rem, 4vw, 3.25rem);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bone);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.03;
+  }
+
+  ::selection {
+    background-color: var(--color-teal);
+    color: var(--color-paper);
+  }
+}
+
+@layer components {
+  /* Page width container */
+  .shell {
+    width: 100%;
+    max-width: 84rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 2.5rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .shell {
+      padding-inline: 3.5rem;
+    }
+  }
+
+  /* Small-caps section label */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  /* Display numerals for stats / editorial accents */
+  .figure {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    font-variant-numeric: lining-nums;
+  }
+}
+
+/* Reveal-on-scroll (progressive enhancement; content is visible without JS). */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
