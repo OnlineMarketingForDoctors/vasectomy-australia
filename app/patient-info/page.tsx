@@ -52,7 +52,7 @@ export default function PatientInfoPage() {
               </ul>
             </Reveal>
             <Reveal delay={120} className="lg:col-span-5 lg:col-start-8">
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-sand">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft">
                 <Image src={images.consult.src} alt={images.consult.alt} fill sizes="(max-width:1024px) 100vw, 42vw" className="object-cover" />
               </div>
             </Reveal>
@@ -68,7 +68,7 @@ export default function PatientInfoPage() {
               <h2 className="text-[length:var(--text-headline)]">
                 {patientInfo.procedure.title}
               </h2>
-              <div className="relative mt-8 aspect-[3/2] w-full overflow-hidden rounded-[2px] bg-sand">
+              <div className="relative mt-8 aspect-[3/2] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft">
                 <Image src={images.geoffProcedure.src} alt={images.geoffProcedure.alt} fill sizes="(max-width:1024px) 100vw, 42vw" className="object-cover" />
               </div>
             </Reveal>
@@ -93,7 +93,7 @@ export default function PatientInfoPage() {
         <div className="shell py-20 md:py-28">
           <div className="grid items-center gap-y-10 lg:grid-cols-12 lg:gap-x-14">
             <Reveal className="lg:col-span-5 lg:order-2 lg:col-start-8">
-              <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[2px] bg-sand">
+              <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft">
                 <Image src={images.anaesthetic.src} alt={images.anaesthetic.alt} fill sizes="(max-width:1024px) 100vw, 42vw" className="object-cover" />
               </div>
             </Reveal>

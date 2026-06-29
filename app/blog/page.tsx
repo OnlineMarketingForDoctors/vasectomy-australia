@@ -49,7 +49,7 @@ export default function BlogPage() {
           {/* Featured */}
           <Reveal>
             <Link href={`/blog/${featured.slug}`} className="group grid items-center gap-y-8 lg:grid-cols-12 lg:gap-x-14">
-              <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[2px] bg-sand lg:col-span-7">
+              <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft lg:col-span-7">
                 <Image src={featuredImg.src} alt={featuredImg.alt} fill priority sizes="(max-width:1024px) 100vw, 58vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
               </div>
               <div className="lg:col-span-5">
@@ -70,7 +70,7 @@ export default function BlogPage() {
             {rest.map((post, i) => (
               <Reveal as="div" key={post.slug} delay={Math.min(i * 60, 240)}>
                 <Link href={`/blog/${post.slug}`} className="group grid items-center gap-x-8 gap-y-4 border-b border-line py-8 sm:grid-cols-[10rem_1fr_auto] sm:py-10">
-                  <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[2px] bg-sand sm:w-40">
+                  <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft sm:w-40">
                     <Image src={postImages[(i + 1) % postImages.length].src} alt="" fill sizes="160px" className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
                   </div>
                   <div>

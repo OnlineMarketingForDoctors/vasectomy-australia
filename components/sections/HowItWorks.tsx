@@ -32,7 +32,7 @@ export function HowItWorks() {
 
           {/* Explainer video (streamed from Drive) */}
           <Reveal delay={120} className="lg:col-span-6 lg:col-start-7">
-            <div className="relative aspect-video w-full overflow-hidden rounded-[3px] bg-teal-deep/10 ring-1 ring-line">
+            <div className="relative aspect-video w-full overflow-hidden rounded-[3px] bg-teal-deep/10 shadow-soft ring-1 ring-line">
               <iframe
                 src="https://drive.google.com/file/d/1HdK4ZIzeQ2Hs1Smu54hBPvHAxcwyqike/preview"
                 title="How a no-scalpel vasectomy works — Dr Geoff Cashion"
@@ -48,7 +48,7 @@ export function HowItWorks() {
           {/* Images */}
           <div className="space-y-6 lg:col-span-5">
             <Reveal>
-              <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[2px] bg-sand">
+              <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft">
                 <Image
                   src={images.procedure.src}
                   alt={images.procedure.alt}
@@ -59,7 +59,7 @@ export function HowItWorks() {
               </div>
             </Reveal>
             <Reveal delay={120}>
-              <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[2px] bg-sand">
+              <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft">
                 <Image
                   src={images.anaesthetic.src}
                   alt={images.anaesthetic.alt}

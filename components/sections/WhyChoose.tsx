@@ -10,7 +10,7 @@ export function WhyChoose() {
         <div className="grid items-center gap-y-12 lg:grid-cols-12 lg:gap-x-14">
           {/* Image */}
           <Reveal className="lg:col-span-5">
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-teal-deep/40">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-teal-deep/40 shadow-soft">
               <Image
                 src={images.geoffProcedure.src}
                 alt={images.geoffProcedure.alt}

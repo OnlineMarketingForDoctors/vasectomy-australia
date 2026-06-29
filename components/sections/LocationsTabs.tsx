@@ -68,7 +68,7 @@ export function LocationsTabs({ initialCount }: { initialCount?: number }) {
           return (
             <div
               key={`${c.city}-${c.clinic}`}
-              className="flex flex-col overflow-hidden rounded-[3px] border border-line bg-paper"
+              className="flex flex-col overflow-hidden rounded-[3px] border border-line bg-paper shadow-soft"
             >
               <div className="relative aspect-[16/10] w-full bg-sand">
                 <iframe

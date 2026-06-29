@@ -17,6 +17,7 @@ export type DoctorProfile = {
   bio: string[];
   personal: string;
   qualifications: { year: string; text: string }[];
+  badge: { value: string; label: string };
 };
 
 export const doctorProfiles: DoctorProfile[] = [
@@ -42,6 +43,7 @@ export const doctorProfiles: DoctorProfile[] = [
       { year: "2013", text: "Fellowship, The Royal College of Emergency Medicine" },
       { year: "2018", text: "Graduate Certificate in Occupational Medicine, Otago University" },
     ],
+    badge: { value: "4,000+", label: "vasectomies a year" },
   },
   {
     id: "matt",
@@ -63,6 +65,7 @@ export const doctorProfiles: DoctorProfile[] = [
       { year: "2003", text: "Designated Aviation Medical Examiner, CASA" },
       { year: "2006", text: "Fellowship of the Royal Australian College of General Practitioners" },
     ],
+    badge: { value: "Since 2008", label: "performing vasectomies" },
   },
 ];
 

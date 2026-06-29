@@ -11,14 +11,26 @@ function DoctorBlock({ doctor, flip }: { doctor: Doctor; flip: boolean }) {
       <Reveal
         className={`lg:col-span-5 ${flip ? "lg:order-2 lg:col-start-8" : ""}`}
       >
-        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-sand">
-          <Image
-            src={img.src}
-            alt={img.alt}
-            fill
-            sizes="(max-width: 1024px) 100vw, 42vw"
-            className="object-cover object-top"
-          />
+        <div className="relative">
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft">
+            <Image
+              src={img.src}
+              alt={img.alt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 42vw"
+              className="object-cover object-top"
+            />
+          </div>
+          <div
+            className={`absolute bottom-4 max-w-[12rem] rounded-[3px] bg-paper p-5 shadow-soft ring-1 ring-line ${
+              flip ? "left-4 lg:-bottom-6 lg:-left-6" : "right-4 lg:-bottom-6 lg:-right-6"
+            }`}
+          >
+            <p className="figure text-4xl leading-none text-teal">{doctor.badge.value}</p>
+            <p className="mt-2 text-xs uppercase tracking-[0.14em] text-ink-soft">
+              {doctor.badge.label}
+            </p>
+          </div>
         </div>
       </Reveal>
 
@@ -77,7 +89,7 @@ export function Doctors() {
 
         {/* Both doctors, wide */}
         <Reveal delay={120}>
-          <div className="relative mt-12 aspect-[16/9] w-full overflow-hidden rounded-[2px] bg-sand md:mt-16">
+          <div className="relative mt-12 aspect-[16/9] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft md:mt-16">
             <Image
               src={images.doctorsDiscussion.src}
               alt={images.doctorsDiscussion.alt}

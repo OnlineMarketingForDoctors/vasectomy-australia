@@ -30,7 +30,7 @@ export default function FeesPage() {
         <div className="shell py-20 md:py-28">
           <div className="grid items-stretch gap-10 lg:grid-cols-12 lg:gap-14">
             <Reveal className="lg:col-span-5">
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-sand lg:h-full">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft lg:h-full">
                 <Image src={images.consult.src} alt={images.consult.alt} fill sizes="(max-width:1024px) 100vw, 42vw" className="object-cover" />
               </div>
             </Reveal>

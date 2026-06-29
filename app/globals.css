@@ -95,6 +95,13 @@
     font-variant-numeric: lining-nums;
   }
 
+  /* Soft, warm drop shadow for framed images & floating cards */
+  .shadow-soft {
+    box-shadow:
+      0 22px 48px -28px rgba(26, 25, 23, 0.5),
+      0 6px 16px -10px rgba(26, 25, 23, 0.26);
+  }
+
   /* Rich green gradient for feature sections */
   .bg-green-gradient {
     background-color: #0e4a43;

@@ -19,7 +19,7 @@ export function Fees() {
         <div className="mt-14 grid items-stretch gap-10 lg:grid-cols-12 lg:gap-14">
           {/* Image */}
           <Reveal className="lg:col-span-5">
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-sand lg:h-full">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft lg:h-full">
               <Image
                 src={images.consult.src}
                 alt={images.consult.alt}

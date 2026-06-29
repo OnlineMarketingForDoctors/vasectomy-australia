@@ -98,6 +98,7 @@ export type Doctor = {
   lead: string;
   bio: string[];
   credentials: string[];
+  badge: { value: string; label: string };
 };
 
 export const doctors: Doctor[] = [
@@ -119,6 +120,7 @@ export const doctors: Doctor[] = [
       "No-scalpel trained under Dr Doug Stein (Florida)",
       "Full-time vasectomist",
     ],
+    badge: { value: "4,000+", label: "vasectomies a year" },
   },
   {
     id: "matt",
@@ -138,6 +140,7 @@ export const doctors: Doctor[] = [
       "US-trained, open-ended no-scalpel technique",
       "Performing vasectomies since 2008",
     ],
+    badge: { value: "Since 2008", label: "performing vasectomies" },
   },
 ];
 
