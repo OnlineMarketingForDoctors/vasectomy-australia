@@ -61,9 +61,9 @@ export const images = {
     src: `${CDN}/hf_20260629_000656_0de0f0b8-ef16-476c-9164-61181ceb34ba_min.webp`,
     alt: "Dr Geoff Cashion preparing in a modern procedure room",
   },
-  // Both doctors in discussion (3:2)
+  // Both doctors together (16:9)
   doctorsDiscussion: {
-    src: `${CDN}/hf_20260629_000658_d82c1572-1cd4-482c-9977-1036d47d7801_min.webp`,
-    alt: "Dr Geoff Cashion and Dr Matt Valentine reviewing notes together",
+    src: `${CDN}/hf_20260629_002842_76f2fd8e-1a97-4358-8094-f164edd5f064_min.webp`,
+    alt: "Dr Geoff Cashion and Dr Matt Valentine at Vasectomy Australia",
   },
 } satisfies Record<string, SiteImage>;
