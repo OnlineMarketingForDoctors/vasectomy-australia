@@ -8,14 +8,14 @@ export function Hero() {
   return (
     <section className="relative isolate flex min-h-[88vh] items-center overflow-hidden bg-teal-deep text-paper">
       <Image
-        src={images.doctorsDiscussion.src}
-        alt={images.doctorsDiscussion.alt}
+        src={images.heroWide.src}
+        alt={images.heroWide.alt}
         fill
         priority
         sizes="100vw"
-        className="-z-10 object-cover object-center"
+        className="-z-10 object-cover object-[72%_center]"
       />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-teal-deep via-teal-deep/85 to-teal-deep/30" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-teal-deep via-teal-deep/80 to-teal-deep/15" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-teal-deep/70 via-transparent to-teal-deep/30" />
 
       <div className="shell w-full py-24 md:py-28">
