@@ -7,6 +7,14 @@ export function ZipMoney() {
       <div className="shell py-16 md:py-20">
         <Reveal className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
           <div className="max-w-2xl">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/brand/zip-money-logo.svg"
+              alt="Zip Money"
+              width={300}
+              height={135}
+              className="mb-6 h-12 w-auto rounded-lg ring-1 ring-ink/10"
+            />
             <h2 className="text-balance font-display text-3xl md:text-[2.5rem]">
               {zip.title}
             </h2>
