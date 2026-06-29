@@ -7,6 +7,33 @@
  * Kept as typed data so it maps directly onto Sanity documents later.
  */
 
+export type NavItem = {
+  label: string;
+  href: string;
+  children?: { label: string; href: string }[];
+};
+
+const nav: NavItem[] = [
+  {
+    label: "Patient Info",
+    href: "/patient-info",
+    children: [
+      { label: "Frequently Asked Questions", href: "/faq" },
+      { label: "Post-Operative Instructions", href: "/post-operative-instructions" },
+      { label: "Post-Vasectomy Semen Testing", href: "/sperm-test" },
+      { label: "Vasectomy Fees", href: "/fees" },
+      { label: "Medicare Rebate", href: "/medicare" },
+      { label: "Privacy Policy", href: "/privacy-policy" },
+    ],
+  },
+  { label: "Our Doctors", href: "/our-doctors" },
+  { label: "Fees", href: "/fees" },
+  { label: "Locations", href: "/locations" },
+  { label: "Dr Referral", href: "/dr-referral" },
+  { label: "Contact", href: "/contact" },
+  { label: "Blog", href: "/blog" },
+];
+
 export const site = {
   name: "Vasectomy Australia",
   phoneLabel: "1800 SNIPME",
@@ -14,15 +41,7 @@ export const site = {
   phoneHref: "tel:1800764763",
   email: "info@vasectomyaustralia.com.au",
   bookingUrl: "https://vasectomyaustralia.gettimely.com/",
-  nav: [
-    { label: "Patient Info", href: "/patient-info" },
-    { label: "Our Doctors", href: "/our-doctors" },
-    { label: "Fees", href: "/fees" },
-    { label: "Locations", href: "/locations" },
-    { label: "Dr Referral", href: "/dr-referral" },
-    { label: "Contact", href: "/contact" },
-    { label: "Blog", href: "/blog" },
-  ],
+  nav,
 };
 
 export const google = {
