@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { privacy } from "@/lib/pages";
+import { images } from "@/lib/images";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -17,6 +18,7 @@ export default function PrivacyPage() {
         eyebrow="Privacy"
         title="Your privacy matters."
         lead={privacy.intro}
+        image={images.treatmentRoom}
       />
 
       <section className="bg-bone">

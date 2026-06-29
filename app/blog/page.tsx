@@ -41,6 +41,7 @@ export default function BlogPage() {
         eyebrow="Blog"
         title="Advice, answers and the occasional myth-bust."
         lead="Clear, practical reading on no-scalpel vasectomy — from what to expect on the day to getting your Medicare rebate."
+        image={images.consult}
       />
 
       <section className="bg-bone">

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { spermTest } from "@/lib/pages";
+import { images } from "@/lib/images";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -17,6 +18,7 @@ export default function SpermTestPage() {
         eyebrow="Confirming success"
         title="Post-vasectomy semen testing."
         lead={spermTest.intro}
+        image={images.anaesthetic}
       />
 
       <section className="bg-bone">

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { contact } from "@/lib/pages";
 import { site } from "@/lib/content";
+import { images } from "@/lib/images";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { LeadForm } from "@/components/site/LeadForm";
@@ -21,6 +22,7 @@ export default function ContactPage() {
         eyebrow="Contact us"
         title="We're glad to help."
         lead={contact.intro}
+        image={images.reception}
       />
 
       <section className="bg-bone">

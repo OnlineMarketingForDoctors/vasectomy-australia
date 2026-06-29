@@ -20,7 +20,7 @@ export default function DrReferralPage() {
         eyebrow="For referring doctors"
         title="Refer your patient for a vasectomy."
         lead={drReferral.intro}
-        image={images.doctorsConversation}
+        image={images.ctaDoctors}
       />
 
       {/* Benefits */}

@@ -68,7 +68,7 @@ export default function OurDoctorsPage() {
         eyebrow="Our doctors"
         title="You're booking Geoff or Matt — not a clinic."
         lead="Every Vasectomy Australia procedure is performed by one of two doctors, both among the most experienced no-scalpel vasectomists in the country. Here's who you'll meet."
-        image={images.doctorsDiscussion}
+        image={images.doctorsConversation}
       />
 
       <section className="bg-bone">

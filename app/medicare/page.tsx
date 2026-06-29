@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { medicare } from "@/lib/pages";
+import { images } from "@/lib/images";
 import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/CtaBand";
 import { Reveal } from "@/components/ui/Reveal";
@@ -18,6 +19,7 @@ export default function MedicarePage() {
         eyebrow="Medicare rebate"
         title="Your rebate, sorted."
         lead={medicare.intro}
+        image={images.reception}
       />
 
       <section className="bg-bone">

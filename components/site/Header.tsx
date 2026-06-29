@@ -6,13 +6,20 @@ import { site } from "@/lib/content";
 
 function Wordmark({ onClick }: { onClick?: () => void }) {
   return (
-    <Link href="/" onClick={onClick} className="inline-flex items-baseline gap-2">
-      <span className="font-display text-[1.35rem] leading-none tracking-tight">
-        Vasectomy
-      </span>
-      <span className="text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-teal">
-        Australia
-      </span>
+    <Link
+      href="/"
+      onClick={onClick}
+      aria-label="Vasectomy Australia — home"
+      className="inline-flex items-center"
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/brand/logo-dark.webp"
+        alt="Vasectomy Australia"
+        width={310}
+        height={50}
+        className="h-8 w-auto md:h-9"
+      />
     </Link>
   );
 }

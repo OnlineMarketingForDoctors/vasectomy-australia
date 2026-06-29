@@ -22,6 +22,7 @@ export default function FeesPage() {
         eyebrow="Fees"
         title="One simple price. Most of it covered by Medicare."
         lead="No hidden fees and no surprises — and a fraction of the cost of a vasectomy in a private hospital, which can run to $2,260 or more."
+        image={images.consult}
       />
 
       {/* Fee breakdown */}

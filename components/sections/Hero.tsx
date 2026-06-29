@@ -6,78 +6,68 @@ import { GoogleBadge } from "@/components/ui/GoogleBadge";
 
 export function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden">
-      <div className="shell">
-        <div className="grid items-stretch gap-y-10 lg:grid-cols-12 lg:gap-x-10">
-          {/* Copy */}
-          <div className="order-2 flex flex-col justify-center pb-14 pt-4 lg:order-1 lg:col-span-6 lg:pb-28 lg:pt-24">
-            <Reveal>
-              <p className="eyebrow text-clay">{hero.eyebrow}</p>
-            </Reveal>
-            <Reveal delay={80}>
-              <h1 className="mt-6 text-[length:var(--text-display)]">
-                {hero.title}
-              </h1>
-            </Reveal>
-            <Reveal delay={160}>
-              <p className="mt-7 max-w-md text-lg leading-relaxed text-ink-soft">
-                {hero.lead}
-              </p>
-            </Reveal>
-            <Reveal delay={220}>
-              <div className="mt-9 flex flex-wrap items-center gap-3">
-                <a
-                  href={hero.primaryCta.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center rounded-full bg-teal px-7 py-3.5 text-sm font-medium text-paper transition-colors hover:bg-teal-deep"
-                >
-                  {hero.primaryCta.label}
-                </a>
-                <a
-                  href={hero.secondaryCta.href}
-                  className="inline-flex items-center rounded-full border border-ink/15 px-7 py-3.5 text-sm font-medium text-ink transition-colors hover:border-ink/40"
-                >
-                  {hero.secondaryCta.label}
-                </a>
-              </div>
-            </Reveal>
-            <Reveal delay={280}>
-              <div className="mt-8">
-                <GoogleBadge />
-              </div>
-            </Reveal>
-            <Reveal delay={340}>
-              <dl className="mt-10 flex max-w-md divide-x divide-line border-t border-line pt-6">
-                {hero.microStats.map((s) => (
-                  <div key={s.label} className="flex-1 px-4 first:pl-0">
-                    <dt className="figure text-3xl text-teal">{s.value}</dt>
-                    <dd className="mt-1 text-xs uppercase tracking-wider text-ink-soft">
-                      {s.label}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </Reveal>
-          </div>
+    <section className="relative isolate flex min-h-[88vh] items-center overflow-hidden bg-teal-deep text-paper">
+      <Image
+        src={images.doctorsDiscussion.src}
+        alt={images.doctorsDiscussion.alt}
+        fill
+        priority
+        sizes="100vw"
+        className="-z-10 object-cover object-center"
+      />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-teal-deep via-teal-deep/85 to-teal-deep/30" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-teal-deep/70 via-transparent to-teal-deep/30" />
 
-          {/* Image */}
-          <div className="relative order-1 lg:order-2 lg:col-span-6">
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-sand lg:absolute lg:inset-y-8 lg:right-[-3.5rem] lg:aspect-auto lg:left-0 lg:h-[calc(100%-4rem)]">
-              <Image
-                src={images.heroDoctors.src}
-                alt={images.heroDoctors.alt}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-top"
-              />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/45 to-transparent" />
-              <p className="absolute bottom-5 left-5 right-5 text-sm font-medium text-paper">
-                Dr Geoff Cashion &amp; Dr Matt Valentine
-              </p>
+      <div className="shell w-full py-24 md:py-28">
+        <div className="max-w-2xl">
+          <Reveal>
+            <p className="eyebrow text-clay-soft">{hero.eyebrow}</p>
+          </Reveal>
+          <Reveal delay={80}>
+            <h1 className="mt-6 text-[length:var(--text-display)] text-paper">
+              {hero.title}
+            </h1>
+          </Reveal>
+          <Reveal delay={160}>
+            <p className="mt-7 max-w-xl text-lg leading-relaxed text-paper/85">
+              {hero.lead}
+            </p>
+          </Reveal>
+          <Reveal delay={220}>
+            <div className="mt-9 flex flex-wrap items-center gap-3">
+              <a
+                href={hero.primaryCta.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center rounded-full bg-paper px-7 py-3.5 text-sm font-medium text-teal-deep transition-colors hover:bg-clay hover:text-paper"
+              >
+                {hero.primaryCta.label}
+              </a>
+              <a
+                href={hero.secondaryCta.href}
+                className="inline-flex items-center rounded-full border border-paper/40 px-7 py-3.5 text-sm font-medium text-paper transition-colors hover:border-paper"
+              >
+                {hero.secondaryCta.label}
+              </a>
             </div>
-          </div>
+          </Reveal>
+          <Reveal delay={280}>
+            <div className="mt-8">
+              <GoogleBadge variant="dark" />
+            </div>
+          </Reveal>
+          <Reveal delay={340}>
+            <dl className="mt-10 flex max-w-md divide-x divide-paper/20 border-t border-paper/20 pt-6">
+              {hero.microStats.map((s) => (
+                <div key={s.label} className="flex-1 px-4 first:pl-0">
+                  <dt className="figure text-3xl text-paper">{s.value}</dt>
+                  <dd className="mt-1 text-xs uppercase tracking-wider text-paper/65">
+                    {s.label}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
         </div>
       </div>
     </section>

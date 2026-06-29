@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { faqAll } from "@/lib/pages";
 import { site } from "@/lib/content";
+import { images } from "@/lib/images";
 import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/CtaBand";
 import { Reveal } from "@/components/ui/Reveal";
@@ -20,6 +21,7 @@ export default function FaqPage() {
         eyebrow="FAQ"
         title="The questions men actually ask."
         lead="Everything you might be wondering about a no-scalpel vasectomy. Still unsure? Free phone consultations are available."
+        image={images.geoffProcedure}
       />
 
       <section className="bg-bone">
