@@ -3,7 +3,17 @@ import { howItWorks } from "@/lib/content";
 import { images } from "@/lib/images";
 import { Reveal } from "@/components/ui/Reveal";
 
+function ChevronDown({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 12 12" className={className} fill="none" aria-hidden>
+      <path d="M3 4.5 6 7.5 9 4.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export function HowItWorks() {
+  const steps = howItWorks.steps;
+
   return (
     <section id="how" className="scroll-mt-24 bg-paper">
       <div className="shell py-24 md:py-32">
@@ -19,7 +29,7 @@ export function HowItWorks() {
           </Reveal>
         </div>
 
-        <div className="mt-16 grid gap-10 lg:grid-cols-12 lg:gap-14">
+        <div className="mt-16 grid items-stretch gap-10 lg:grid-cols-12 lg:gap-14">
           {/* Images */}
           <div className="space-y-6 lg:col-span-5">
             <Reveal>
@@ -46,17 +56,38 @@ export function HowItWorks() {
             </Reveal>
           </div>
 
-          {/* Steps */}
+          {/* Steps timeline */}
           <div className="lg:col-span-6 lg:col-start-7">
-            <ol>
-              {howItWorks.steps.map((step, i) => (
-                <Reveal as="li" key={step.n} delay={i * 70}>
-                  <div className="flex gap-6 border-t border-line py-6 first:border-t-0 first:pt-0">
-                    <span className="figure text-3xl text-clay">{step.n}</span>
-                    <p className="pt-1 leading-relaxed text-ink">{step.text}</p>
-                  </div>
-                </Reveal>
-              ))}
+            <ol className="flex h-full flex-col">
+              {steps.map((step, i) => {
+                const last = i === steps.length - 1;
+                return (
+                  <Reveal
+                    as="li"
+                    key={step.n}
+                    delay={i * 70}
+                    className={`flex gap-6 ${last ? "" : "flex-1"}`}
+                  >
+                    {/* Rail: numbered node + connecting line */}
+                    <div className="flex flex-col items-center self-stretch">
+                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-clay/40 bg-clay/5">
+                        <span className="figure text-lg text-clay">{step.n}</span>
+                      </span>
+                      {!last && (
+                        <div className="flex min-h-12 w-full flex-1 flex-col items-center pt-2">
+                          <span className="w-px flex-1 bg-gradient-to-b from-clay/55 to-clay/15" />
+                          <ChevronDown className="mt-1 h-3 w-3 text-clay/50" />
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Copy */}
+                    <p className="max-w-md pb-10 pt-2.5 leading-relaxed text-ink">
+                      {step.text}
+                    </p>
+                  </Reveal>
+                );
+              })}
             </ol>
           </div>
         </div>
