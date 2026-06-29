@@ -1,50 +1,72 @@
 /**
- * Homepage content. Structured as plain data so it maps directly onto Sanity
- * documents/objects when the CMS is wired up. Copy is adapted from the current
- * vasectomyaustralia.com.au site, restructured for an editorial layout and
- * re-focused on the two doctors (Dr Geoff Cashion & Dr Matt Valentine).
+ * Homepage content — adapted from the live vasectomyaustralia.com.au copy,
+ * re-flowed for an editorial layout and re-focused on the two doctors
+ * (Dr Geoff Cashion & Dr Matt Valentine). Patient testimonials are intentionally
+ * omitted for AHPRA compliance; aggregate Google rating is shown instead.
+ *
+ * Kept as typed data so it maps directly onto Sanity documents later.
  */
 
 export const site = {
   name: "Vasectomy Australia",
+  phoneLabel: "1800 SNIPME",
+  phoneSub: "1800 764 763",
+  phoneHref: "tel:1800764763",
+  email: "info@vasectomyaustralia.com.au",
   bookingUrl: "https://vasectomyaustralia.gettimely.com/",
   nav: [
-    { label: "The Doctors", href: "#doctors" },
-    { label: "The Procedure", href: "#procedure" },
-    { label: "Reviews", href: "#reviews" },
+    { label: "Our Doctors", href: "#doctors" },
+    { label: "Why Us", href: "#why" },
+    { label: "How It Works", href: "#how" },
+    { label: "Fees", href: "#fees" },
     { label: "Locations", href: "#locations" },
-    { label: "Cost", href: "#cost" },
     { label: "FAQ", href: "#faq" },
   ],
 };
 
+export const google = {
+  rating: "5.0",
+  count: "361",
+  href: "https://www.google.com/search?q=vasectomy+australia+reviews",
+};
+
 export const hero = {
-  eyebrow: "Australia's most trusted vasectomists",
-  // The names lead — the brand sits behind the doctors.
-  titleLines: ["Geoff", "& Matt."],
+  eyebrow: "Dr Geoff Cashion & Dr Matt Valentine",
+  title: "Safe, effective and affordable no-scalpel vasectomy.",
   lead:
-    "Two doctors. One quiet reputation built on thousands of men who'd send a mate without a second thought. This is the team behind Vasectomy Australia.",
-  primaryCta: { label: "Book your vasectomy", href: "https://vasectomyaustralia.gettimely.com/" },
+    "Australia's most trusted vasectomists. Every procedure is performed by Geoff or Matt themselves — under local anaesthetic, in about 15 minutes, with a greater than 99% success rate.",
+  primaryCta: { label: "Book online", href: "https://vasectomyaustralia.gettimely.com/" },
   secondaryCta: { label: "Meet Geoff & Matt", href: "#doctors" },
   microStats: [
-    { value: "4,000+", label: "a year" },
-    { value: "<15 min", label: "in & out" },
+    { value: "9,000+", label: "procedures a year" },
+    { value: "~15 min", label: "in & out" },
     { value: ">99%", label: "effective" },
   ],
 };
 
-export const stats = [
-  { value: "4,000+", label: "Vasectomies a year, by Dr Geoff alone" },
-  { value: "23,000+", label: "Procedures performed by the team" },
-  { value: ">99%", label: "Effective at preventing pregnancy" },
-  { value: "<15 min", label: "Most procedures, start to finish" },
+export const pillars = [
+  {
+    key: "Safe",
+    body:
+      "Vasectomy Australia performs every vasectomy under local anaesthetic. Most procedures take less than 15 minutes, and our no-scalpel technique means a quicker recovery — so you can get back to your usual activities, usually within 7 days.",
+  },
+  {
+    key: "Effective",
+    body:
+      "A no-scalpel vasectomy with Vasectomy Australia has a greater than 99% success rate — one of the most reliable forms of contraception available.",
+  },
+  {
+    key: "Affordable",
+    body:
+      "Vasectomy Australia is one of the most affordable vasectomies on the market, with a low out-of-pocket expense of just $597 after your Medicare rebate.",
+  },
 ];
 
 export const doctorsIntro = {
-  eyebrow: "The doctors",
+  eyebrow: "Our doctors",
   title: "You're not booking a clinic. You're booking Geoff or Matt.",
   body:
-    "Most men who come to us were sent by someone who'd been through it — a brother, a mate, a colleague who said \"go and see this bloke.\" That word-of-mouth is the whole business. So we keep it simple: every procedure is done by Dr Geoff Cashion or Dr Matt Valentine — two of the most experienced no-scalpel vasectomists in the country — not a rotating roster of faces you'll never meet again.",
+    "Both of our doctors trained under world-leading vasectomists and have dedicated their full-time practice to this one procedure — together performing over 9,000 cases a year. When you book with Vasectomy Australia, your vasectomy is done by Dr Geoff Cashion or Dr Matt Valentine personally, start to finish.",
 };
 
 export type Doctor = {
@@ -56,7 +78,6 @@ export type Doctor = {
   lead: string;
   bio: string[];
   credentials: string[];
-  stat: { value: string; label: string };
 };
 
 export const doctors: Doctor[] = [
@@ -76,9 +97,8 @@ export const doctors: Doctor[] = [
       "MBBS, University of Queensland",
       "Fellow, Australian College of Rural & Remote Medicine",
       "No-scalpel trained under Dr Doug Stein (Florida)",
-      "Full-time vasectomist since 2017",
+      "Full-time vasectomist",
     ],
-    stat: { value: "4,000+", label: "vasectomies a year" },
   },
   {
     id: "matt",
@@ -87,10 +107,10 @@ export const doctors: Doctor[] = [
     region: "Queensland & ACT",
     image: "mattPortrait",
     lead:
-      "Performing vasectomies in Brisbane since 2008 — with the lowest risk, open-ended technique.",
+      "Performing vasectomies since 2008 — with the lowest-risk, open-ended technique.",
     bio: [
-      "Matt has been doing vasectomies since 2008, first training in the traditional technique and then travelling to the United States to specialise in the open-ended, no-scalpel method that has the lowest possible risk of complications.",
-      "He completed his medical degree at the University of Adelaide and spent five years as a full-time Medical Officer in the Royal Australian Air Force before dedicating his practice to men's procedures across Queensland and Canberra.",
+      "Matt has been doing vasectomies since 2008, first training in the traditional technique and then travelling to the United States to specialise in the open-ended, no-scalpel method that carries the lowest possible risk of complications.",
+      "He completed his medical degree at the University of Adelaide and spent five years as a full-time Medical Officer in the Royal Australian Air Force before dedicating his practice to vasectomy across Queensland and Canberra.",
     ],
     credentials: [
       "MBBS, University of Adelaide",
@@ -98,89 +118,84 @@ export const doctors: Doctor[] = [
       "US-trained, open-ended no-scalpel technique",
       "Performing vasectomies since 2008",
     ],
-    stat: { value: "Since 2008", label: "thousands of procedures" },
   },
 ];
 
-export const pullQuote = {
-  quote: "He's the doc who did my vasectomy — and he's great.",
-  attribution: "A comment that turns up, again and again, under our posts.",
+export const whyChoose = {
+  eyebrow: "Why choose us",
+  title: "Why men choose Vasectomy Australia.",
+  points: [
+    "Expert training under world-leading vasectomists",
+    "Over 9,000 cases performed a year, collectively",
+    "A gentle technique for fast recovery with minimal downtime",
+    "No-scalpel and open-ended techniques",
+    "One simple, affordable price",
+    "24-hour after-care support",
+    "Same-day consultation and procedure",
+    "Free phone consultations available",
+    "Multiple locations close to patients across Australia",
+    "Quick and easy online bookings",
+  ],
 };
 
-export const procedure = {
-  eyebrow: "The procedure",
-  title: "The no-scalpel difference.",
+export const howItWorks = {
+  eyebrow: "How it works",
+  title: "What actually happens — in about 15 minutes.",
   body:
-    "No scalpel. No stitches. One tiny opening, made with a blunt instrument, through which both tubes are reached and sealed. It means less bleeding, less bruising and a faster recovery than the old cut-and-stitch method — all under local anaesthetic, while you're wide awake and comfortable.",
+    "Dr Cashion explains how a vasectomy works and what recovery looks like, so you can make an informed decision about whether it's right for you. The operation takes about 15 minutes and goes like this:",
   steps: [
     {
       n: "01",
-      title: "Consult & decide",
-      text: "A straightforward conversation about whether a vasectomy is right for you. No pressure, plenty of room for questions.",
+      text: "A local anaesthetic is injected using a fine needle — it feels no worse than a flu injection or a dentist's needle.",
     },
     {
       n: "02",
-      title: "The procedure",
-      text: "Local anaesthetic, then the no-scalpel technique. Most men are in and out in under 15 minutes and walk out the same day.",
+      text: "A tiny hole is made in the scrotum — no scalpel, and no stitches required.",
     },
     {
       n: "03",
-      title: "Recovery",
-      text: "Take it easy for a couple of days. Most men are back to normal in about a week, and back to most activities sooner.",
+      text: "The vas deferens is divided and the testicular end is left open. This open-ended approach helps prevent congestion and reduces the risk of pain or post-vasectomy syndrome.",
+    },
+    {
+      n: "04",
+      text: "A tiny layer of tissue is placed between the two ends of the vas to stop them re-joining.",
+    },
+    {
+      n: "05",
+      text: "The same procedure is performed on the other side, through the very same opening.",
+    },
+    {
+      n: "06",
+      text: "The skin edge is clipped together without stitches, and a dressing is applied. You're done.",
     },
   ],
 };
 
-export const reassurance = {
-  eyebrow: "What it's actually like",
-  title: "Calm, private, and over before you've talked yourself out of it.",
+export const fees = {
+  eyebrow: "Fees",
+  title: "One simple price. Most of it covered by Medicare.",
+  rows: [
+    { label: "Vasectomy fee", value: "$825" },
+    { label: "Less Medicare rebate", value: "−$228" },
+  ],
+  total: { label: "Out-of-pocket cost", value: "$597" },
+  terms:
+    "A $100 deposit secures your booking, with the $725 balance due on procedure day. We'll submit your Medicare claim after the procedure, and your $228 rebate will land in your bank account within 1–2 days. See our cancellation policy for details.",
+};
+
+export const zip = {
+  title: "Vasectomy Australia now accepts Zip Money.",
   body:
-    "The thing men worry about most is the thing we've made routine. You're awake, comfortable and treated with respect from the moment you arrive. We've looked after men with needle phobias, men who put it off for a decade, and men who booked on a Friday and were back at work Monday. The fear is almost always bigger than the procedure.",
-  points: [
-    "Done under local anaesthetic — you're awake and comfortable",
-    "Performed by Geoff or Matt, start to finish — never handed off",
-    "Private, unhurried clinics with staff who do this every day",
-  ],
-};
-
-export const reviews = {
-  eyebrow: "Reviews",
-  title: "Hundreds of men. One recommendation.",
-  intro:
-    "Vasectomy Australia holds hundreds of 5-star reviews across Google, ProductReview and beyond — most of them naming the doctor by name.",
-  featured: {
-    quote:
-      "I was made to feel completely comfortable before the operation, with plenty of time to ask questions. The procedure itself was quick and I felt no discomfort. I'd recommend Geoff to anyone.",
-    name: "Verified patient",
-    location: "Sydney, NSW",
-  },
-  items: [
-    {
-      quote:
-        "I have a real needle phobia and was dreading it. Geoff and his assistant could not have been more accommodating — it was over before I knew it, and recovery was fine.",
-      name: "Verified patient",
-      location: "Newcastle, NSW",
-    },
-    {
-      quote:
-        "Dr Cashion and his team were incredibly professional. Clean, welcoming clinic and friendly staff who explained everything before and after.",
-      name: "Verified patient",
-      location: "Gold Coast, QLD",
-    },
-    {
-      quote:
-        "Start to finish in about ten minutes. Matt talked me through every step. Honestly the easiest medical thing I've ever done.",
-      name: "Verified patient",
-      location: "Brisbane, QLD",
-    },
-  ],
+    "Need a hand spreading the cost? You can now use Zip Money to pay for your procedure — apply and book in minutes.",
+  primaryCta: { label: "Book using Zip Money", href: "https://vasectomyaustralia.gettimely.com/" },
+  secondaryCta: { label: "Sign up for Zip", href: "https://zip.co/au/zip-money" },
 };
 
 export const locations = {
   eyebrow: "Locations",
   title: "No-scalpel vasectomy clinics across Australia.",
   body:
-    "Geoff covers New South Wales and South Australia; Matt covers Queensland and the ACT. Between the team, Vasectomy Australia runs clinics in every state — so there's almost always one near you.",
+    "Geoff covers New South Wales and South Australia; Matt covers Queensland and the ACT. Between the team, Vasectomy Australia runs clinics close to patients in every state — so there's almost always one near you.",
   states: [
     { state: "New South Wales", cities: "Sydney CBD · Inner West · Eastern Suburbs · North Shore · Northern Beaches · The Hills · Penrith · Sutherland · Central Coast · Newcastle · Wollongong · Orange · Dubbo" },
     { state: "Queensland", cities: "Brisbane · Gold Coast · Sunshine Coast · Springfield · Toowoomba · Rockhampton · Mackay" },
@@ -191,54 +206,92 @@ export const locations = {
   ],
 };
 
-export const cost = {
-  eyebrow: "Cost",
-  title: "One simple price. Most of it covered by Medicare.",
-  price: "$567–$597",
-  priceNote: "out of pocket after your Medicare rebate",
-  body:
-    "No hidden fees and no surprises. A small deposit secures your appointment, with the balance due on the day. Pricing varies slightly by location.",
-  included: [
-    "Your consultation and the procedure itself",
-    "Local anaesthetic, performed by Geoff or Matt",
-    "Post-procedure care and your follow-up semen analysis",
-  ],
-};
-
 export type Faq = { q: string; a: string };
 
 export const faqs: Faq[] = [
   {
-    q: "Does it hurt?",
-    a: "You'll feel the local anaesthetic going in — a brief sting — and after that, mostly pressure rather than pain. Most men are surprised by how little there is to it. There's some tenderness for a few days afterwards, easily managed with simple pain relief.",
+    q: "What is a vasectomy?",
+    a: "A vasectomy is a simple, permanent form of male contraception. The vas deferens — the tubes that carry sperm — are divided so sperm can no longer reach the semen. Everything else stays exactly the same: your hormones, erections and ejaculation are unchanged.",
   },
   {
-    q: "How long does the whole thing take?",
-    a: "The procedure itself is usually under 15 minutes. Allow around 45 minutes at the clinic in total, including a final chat and getting you comfortable.",
+    q: "How long does the procedure take?",
+    a: "The procedure itself takes about 15 minutes. Allow roughly 45 minutes at the clinic in total, including a final chat and getting you comfortable.",
   },
   {
-    q: "When can I go back to work and normal life?",
-    a: "Most men take it easy for a day or two and are back at a desk job within a couple of days. Plan for about a week before strenuous activity, and roughly a week before resuming sex.",
+    q: "What are the types of vasectomy?",
+    a: "There are two broad approaches: the traditional scalpel method, and the modern no-scalpel technique we use — a single tiny opening made with a blunt instrument, which means less bleeding, less bruising and a faster recovery. We use an open-ended, no-scalpel technique.",
   },
   {
-    q: "How effective is it?",
-    a: "A no-scalpel vasectomy is more than 99% effective at preventing pregnancy — one of the most reliable forms of contraception available. We confirm success with a follow-up semen analysis.",
+    q: "How old do I need to be to have a vasectomy?",
+    a: "There's no strict legal age, but a vasectomy should be considered permanent, so we want you to be confident your family is complete. We're happy to talk it through with you at your consultation.",
   },
   {
-    q: "Am I awake during it?",
-    a: "Yes. It's done under local anaesthetic, so you're awake and comfortable the whole time. There's no general anaesthetic and no hospital stay.",
+    q: "Can I drive home after my vasectomy?",
+    a: "Because the procedure is done under local anaesthetic — not sedation — most men are able to drive themselves home. If you'd feel more comfortable, arrange a lift.",
   },
   {
-    q: "Is a vasectomy reversible?",
-    a: "A vasectomy should be considered permanent. Reversals are possible but not guaranteed, so it's best chosen when you're confident your family is complete. We'll talk it through honestly at your consult.",
+    q: "Can I have my procedure done under sedation or a general anaesthetic?",
+    a: "Our procedure is designed around local anaesthetic, which is safer and quicker and means no hospital stay. If you have particular concerns, raise them during your free phone consultation.",
+  },
+  {
+    q: "Is there any special preparation I need to do?",
+    a: "Very little. Wear snug, supportive underwear, follow the simple pre-procedure instructions we send you, and have a light meal beforehand.",
+  },
+  {
+    q: "Can I get my vasectomy reversed?",
+    a: "A vasectomy should be considered permanent. Reversals are sometimes possible but are never guaranteed and are not covered by Medicare, so it's best chosen when you're sure.",
+  },
+  {
+    q: "What are the risks of having a vasectomy?",
+    a: "A vasectomy is very safe. As with any procedure there are small risks such as bruising, swelling, infection or, rarely, ongoing discomfort. Our open-ended, no-scalpel technique is chosen specifically to keep these risks as low as possible.",
+  },
+  {
+    q: "When will I know the procedure has worked?",
+    a: "You'll provide a follow-up semen sample for analysis. Until you receive the all-clear, keep using your usual contraception.",
+  },
+  {
+    q: "When can I go back to work?",
+    a: "Most men with a desk job are back within a day or two. Allow a little longer if your work is physically demanding.",
+  },
+  {
+    q: "When can I start having sex again?",
+    a: "Most men wait about a week. Remember to keep using contraception until your semen analysis confirms the procedure has worked.",
+  },
+  {
+    q: "Do I need a referral from my GP?",
+    a: "No referral is needed to book with us. GPs are welcome to refer patients — see our Dr Referral page.",
+  },
+  {
+    q: "How many days does it take to recover?",
+    a: "Most men feel back to normal in about 7 days — some sooner, and some take up to a couple of weeks.",
+  },
+  {
+    q: "Do you do the “laser” vasectomy?",
+    a: "There's no such thing as a true “laser” vasectomy — it's a marketing term. We use the proven no-scalpel, open-ended technique.",
+  },
+  {
+    q: "How should I prepare for my vasectomy?",
+    a: "Wear supportive underwear, follow the simple instructions we send before your appointment, and have a light meal beforehand. That's all that's needed.",
+  },
+  {
+    q: "How does recovery take place?",
+    a: "Rest for 24–48 hours with support and an ice pack as needed, avoid heavy lifting and strenuous activity for about a week, and use simple pain relief if you need it. We also offer 24-hour after-care support.",
+  },
+  {
+    q: "How do I get my Medicare rebate?",
+    a: "We submit your Medicare claim for you after the procedure, and your $228 rebate is typically in your bank account within 1–2 days.",
+  },
+  {
+    q: "Can I use my private health insurance?",
+    a: "A vasectomy with us is an out-of-hospital procedure partly covered by Medicare; private health insurance generally doesn't apply, but you're welcome to check with your fund.",
   },
 ];
 
 export const finalCta = {
   eyebrow: "Ready when you are",
-  title: "Book your vasectomy with Geoff or Matt.",
+  title: "Ready to book now?",
   body:
-    "It's quicker, calmer and easier than you're imagining — and you'll be in the hands of two of the most experienced vasectomists in the country.",
+    "It's quicker, calmer and easier than you're imagining — and you'll be in the hands of two of the most experienced vasectomists in the country. Free phone consultations are available.",
   primaryCta: { label: "Book online", href: "https://vasectomyaustralia.gettimely.com/" },
   secondaryCta: { label: "See clinic locations", href: "#locations" },
 };

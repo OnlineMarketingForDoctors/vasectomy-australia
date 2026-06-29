@@ -1,4 +1,5 @@
 import { site, locations } from "@/lib/content";
+import { GoogleBadge } from "@/components/ui/GoogleBadge";
 
 export function Footer() {
   return (
@@ -15,14 +16,9 @@ export function Footer() {
               Australia&apos;s most trusted no-scalpel vasectomists. Every
               procedure performed by Dr Geoff Cashion or Dr Matt Valentine.
             </p>
-            <a
-              href={site.bookingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-7 inline-flex items-center gap-2 rounded-full bg-paper px-6 py-3 text-sm font-medium text-teal-deep transition-colors hover:bg-clay hover:text-paper"
-            >
-              Book your vasectomy
-            </a>
+            <div className="mt-6">
+              <GoogleBadge variant="dark" />
+            </div>
           </div>
 
           <div className="md:col-span-3 md:col-start-7">
@@ -42,25 +38,50 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-3">
-            <h3 className="eyebrow text-paper/50">Across Australia</h3>
+            <h3 className="eyebrow text-paper/50">Get in touch</h3>
             <ul className="mt-5 space-y-3 text-sm">
-              {locations.states.map((s) => (
-                <li key={s.state} className="text-paper/75">
-                  {s.state}
-                </li>
-              ))}
+              <li>
+                <a
+                  href={site.phoneHref}
+                  className="text-paper transition-colors hover:text-clay-soft"
+                >
+                  {site.phoneLabel}{" "}
+                  <span className="text-paper/55">({site.phoneSub})</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="break-all text-paper/75 transition-colors hover:text-paper"
+                >
+                  {site.email}
+                </a>
+              </li>
+              <li className="pt-2">
+                <a
+                  href={site.bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-full bg-paper px-5 py-2.5 font-medium text-teal-deep transition-colors hover:bg-clay hover:text-paper"
+                >
+                  Book online
+                </a>
+              </li>
             </ul>
+            <p className="mt-6 text-xs uppercase tracking-wider text-paper/45">
+              Clinics across {locations.states.length} states &amp; territories
+            </p>
           </div>
         </div>
 
         <div className="mt-16 flex flex-col gap-4 border-t border-paper/15 pt-8 text-xs text-paper/55 md:flex-row md:items-center md:justify-between">
           <p>
-            © {new Date().getFullYear()} Vasectomy Australia. All rights
-            reserved.
+            Powered by Online Marketing For Doctors · © {new Date().getFullYear()}{" "}
+            Vasectomy Australia. All rights reserved.
           </p>
           <p className="max-w-xl text-pretty">
-            This website is general information only and is not medical advice.
-            A vasectomy should be considered a permanent form of contraception.
+            This website is general information only and is not medical advice. A
+            vasectomy should be considered a permanent form of contraception.
           </p>
         </div>
       </div>

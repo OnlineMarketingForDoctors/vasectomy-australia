@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { Fragment } from "react";
 import { hero } from "@/lib/content";
 import { images } from "@/lib/images";
 import { Reveal } from "@/components/ui/Reveal";
+import { GoogleBadge } from "@/components/ui/GoogleBadge";
 
 export function Hero() {
   return (
@@ -15,17 +15,8 @@ export function Hero() {
               <p className="eyebrow text-clay">{hero.eyebrow}</p>
             </Reveal>
             <Reveal delay={80}>
-              <h1 className="mt-6 text-[length:var(--text-mega)]">
-                {hero.titleLines.map((line, i) => (
-                  <span key={i} className="block">
-                    {line.split("&").map((part, j) => (
-                      <Fragment key={j}>
-                        {j > 0 && <span className="text-clay">&</span>}
-                        {part}
-                      </Fragment>
-                    ))}
-                  </span>
-                ))}
+              <h1 className="mt-6 text-[length:var(--text-display)]">
+                {hero.title}
               </h1>
             </Reveal>
             <Reveal delay={160}>
@@ -51,8 +42,13 @@ export function Hero() {
                 </a>
               </div>
             </Reveal>
-            <Reveal delay={300}>
-              <dl className="mt-12 flex max-w-md divide-x divide-line border-t border-line pt-6">
+            <Reveal delay={280}>
+              <div className="mt-8">
+                <GoogleBadge />
+              </div>
+            </Reveal>
+            <Reveal delay={340}>
+              <dl className="mt-10 flex max-w-md divide-x divide-line border-t border-line pt-6">
                 {hero.microStats.map((s) => (
                   <div key={s.label} className="flex-1 px-4 first:pl-0">
                     <dt className="figure text-3xl text-teal">{s.value}</dt>

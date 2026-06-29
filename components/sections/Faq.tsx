@@ -1,5 +1,6 @@
-import { faqs } from "@/lib/content";
+import { faqs, site } from "@/lib/content";
 import { Reveal } from "@/components/ui/Reveal";
+import { GoogleBadge } from "@/components/ui/GoogleBadge";
 
 export function Faq() {
   return (
@@ -12,13 +13,23 @@ export function Faq() {
               <h2 className="mt-5 text-balance text-[length:var(--text-display)]">
                 The questions men actually ask.
               </h2>
+              <p className="mt-6 leading-relaxed text-ink-soft">
+                Still unsure? Free phone consultations are available — call{" "}
+                <a href={site.phoneHref} className="font-medium text-teal underline-offset-2 hover:underline">
+                  {site.phoneLabel}
+                </a>
+                .
+              </p>
+              <div className="mt-7">
+                <GoogleBadge />
+              </div>
             </Reveal>
           </div>
 
           <div className="lg:col-span-7 lg:col-start-6">
             {faqs.map((faq, i) => (
-              <Reveal as="div" key={faq.q} delay={i * 50}>
-                <details className="group border-t border-line py-2 first:border-t-0">
+              <Reveal as="div" key={faq.q} delay={Math.min(i * 30, 200)}>
+                <details className="group border-t border-line/70 py-2 first:border-t-0">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5">
                     <span className="font-display text-xl leading-snug md:text-2xl">
                       {faq.q}

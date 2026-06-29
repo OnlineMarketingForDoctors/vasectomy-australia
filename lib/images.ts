@@ -1,10 +1,10 @@
 /**
  * Editorial imagery for the homepage.
  *
- * These are AI-generated scenes (Higgsfield / Nano Banana Pro) built from the
- * real reference photos of Dr Geoff Cashion and Dr Matt Valentine, currently
- * served from the Higgsfield CloudFront CDN. When content moves into Sanity,
- * each `src` becomes a CMS image field and this map is replaced by the query.
+ * AI-generated scenes (Higgsfield / Nano Banana Pro) built from the real
+ * reference photos of Dr Geoff Cashion and Dr Matt Valentine, served from the
+ * Higgsfield CloudFront CDN. When content moves into Sanity, each `src` becomes
+ * a CMS image field and this map is replaced by the query.
  */
 
 export type SiteImage = {
@@ -19,7 +19,7 @@ export const images = {
   // Hero — Geoff & Matt together (4:5)
   heroDoctors: {
     src: `${CDN}/hf_20260628_231437_cdc0b73c-b5be-42e9-821c-34c9835ac58f_min.webp`,
-    alt: "Dr Geoff Cashion and Dr Matt Valentine, the doctors behind Vasectomy Australia, in a modern clinic",
+    alt: "Dr Geoff Cashion and Dr Matt Valentine, the doctors behind Vasectomy Australia",
   },
   // Dr Geoff environmental portrait (4:5)
   geoffPortrait: {
@@ -31,19 +31,39 @@ export const images = {
     src: `${CDN}/hf_20260628_231515_830f7ff8-002b-4f8a-9072-c82dd86633f7_min.webp`,
     alt: "Dr Matt Valentine, vasectomist at Vasectomy Australia",
   },
-  // Procedure — clinical detail (3:2)
+  // Procedure — gloved hands + instrument tray (3:2)
   procedure: {
     src: `${CDN}/hf_20260628_231517_2e9f3c37-63f6-4b62-a91e-d2a755d518e6_min.webp`,
-    alt: "Gloved hands and a sterile instrument tray in a modern vasectomy clinic",
+    alt: "Sterile instruments in a modern no-scalpel vasectomy clinic",
   },
   // Consultation scene (3:2)
   consult: {
     src: `${CDN}/hf_20260628_231521_b1428970-55ea-452c-ae14-ea3488d649c2_min.webp`,
     alt: "A Vasectomy Australia doctor consulting with a patient",
   },
-  // Final CTA — both doctors, candid wide (16:9)
+  // Both doctors, candid wide (16:9)
   ctaDoctors: {
     src: `${CDN}/hf_20260628_231524_8f1eae10-1b54-43dd-a8df-e952a64a26a1_min.webp`,
     alt: "Dr Geoff Cashion and Dr Matt Valentine at Vasectomy Australia",
+  },
+  // Clinic reception interior (3:2)
+  reception: {
+    src: `${CDN}/hf_20260629_000652_63c0fe27-7866-4543-9769-d8890c2c2b3b_min.webp`,
+    alt: "The calm, modern reception of a Vasectomy Australia clinic",
+  },
+  // Local anaesthetic — gentle fine-needle detail (3:2)
+  anaesthetic: {
+    src: `${CDN}/hf_20260629_000653_56c693ad-fe6a-467f-b179-762326ad36e5_min.webp`,
+    alt: "A doctor preparing a fine needle of local anaesthetic",
+  },
+  // Dr Geoff in the procedure room (3:2)
+  geoffProcedure: {
+    src: `${CDN}/hf_20260629_000656_0de0f0b8-ef16-476c-9164-61181ceb34ba_min.webp`,
+    alt: "Dr Geoff Cashion preparing in a modern procedure room",
+  },
+  // Both doctors in discussion (3:2)
+  doctorsDiscussion: {
+    src: `${CDN}/hf_20260629_000658_d82c1572-1cd4-482c-9977-1036d47d7801_min.webp`,
+    alt: "Dr Geoff Cashion and Dr Matt Valentine reviewing notes together",
   },
 } satisfies Record<string, SiteImage>;

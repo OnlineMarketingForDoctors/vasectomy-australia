@@ -75,6 +75,19 @@ export function Doctors() {
           </Reveal>
         </div>
 
+        {/* Both doctors, wide */}
+        <Reveal delay={120}>
+          <div className="relative mt-12 aspect-[16/9] w-full overflow-hidden rounded-[2px] bg-sand md:mt-16">
+            <Image
+              src={images.doctorsDiscussion.src}
+              alt={images.doctorsDiscussion.alt}
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
+        </Reveal>
+
         <div className="mt-20 space-y-24 md:mt-24 md:space-y-32">
           {doctors.map((doctor, i) => (
             <DoctorBlock key={doctor.id} doctor={doctor} flip={i % 2 === 1} />

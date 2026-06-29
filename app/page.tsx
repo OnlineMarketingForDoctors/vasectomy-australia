@@ -1,12 +1,11 @@
 import { Hero } from "@/components/sections/Hero";
-import { Stats } from "@/components/sections/Stats";
+import { Pillars } from "@/components/sections/Pillars";
 import { Doctors } from "@/components/sections/Doctors";
-import { PullQuote } from "@/components/sections/PullQuote";
-import { Procedure } from "@/components/sections/Procedure";
-import { Reassurance } from "@/components/sections/Reassurance";
-import { Reviews } from "@/components/sections/Reviews";
+import { WhyChoose } from "@/components/sections/WhyChoose";
+import { HowItWorks } from "@/components/sections/HowItWorks";
+import { Fees } from "@/components/sections/Fees";
+import { ZipMoney } from "@/components/sections/ZipMoney";
 import { Locations } from "@/components/sections/Locations";
-import { Cost } from "@/components/sections/Cost";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 
@@ -14,14 +13,13 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Stats />
+      <Pillars />
       <Doctors />
-      <PullQuote />
-      <Procedure />
-      <Reassurance />
-      <Reviews />
+      <WhyChoose />
+      <HowItWorks />
+      <Fees />
+      <ZipMoney />
       <Locations />
-      <Cost />
       <Faq />
       <FinalCta />
     </>

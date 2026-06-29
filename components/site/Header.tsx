@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { site } from "@/lib/content";
 
-function Wordmark({ className = "" }: { className?: string }) {
+function Wordmark() {
   return (
-    <a href="#top" className={`group inline-flex items-baseline gap-2 ${className}`}>
+    <a href="#top" className="inline-flex items-baseline gap-2">
       <span className="font-display text-[1.35rem] leading-none tracking-tight">
         Vasectomy
       </span>
@@ -45,7 +45,7 @@ export function Header() {
       <div className="shell flex h-[4.5rem] items-center justify-between">
         <Wordmark />
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="hidden items-center gap-7 lg:flex">
           {site.nav.map((item) => (
             <a
               key={item.href}
@@ -57,14 +57,20 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
+          <a
+            href={site.phoneHref}
+            className="hidden text-sm font-medium text-ink transition-colors hover:text-teal xl:inline-flex"
+          >
+            {site.phoneLabel}
+          </a>
           <a
             href={site.bookingUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden rounded-full bg-teal px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-teal-deep sm:inline-flex"
           >
-            Book your vasectomy
+            Book online
           </a>
           <button
             type="button"
@@ -117,7 +123,13 @@ export function Header() {
             rel="noopener noreferrer"
             className="mt-6 inline-flex items-center justify-center rounded-full bg-teal px-6 py-4 text-base font-medium text-paper"
           >
-            Book your vasectomy
+            Book online
+          </a>
+          <a
+            href={site.phoneHref}
+            className="mt-3 inline-flex items-center justify-center rounded-full border border-ink/15 px-6 py-4 text-base font-medium text-ink"
+          >
+            Call {site.phoneLabel}
           </a>
         </nav>
       </div>
