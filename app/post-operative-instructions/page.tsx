@@ -40,7 +40,7 @@ export default function PostOpPage() {
       </section>
 
       {/* Activity restrictions */}
-      <section className="bg-teal text-paper">
+      <section className="bg-green-gradient text-paper">
         <div className="shell py-16 md:py-20">
           <Reveal>
             <h2 className="text-[length:var(--text-headline)] text-paper">

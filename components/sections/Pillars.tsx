@@ -3,7 +3,7 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export function Pillars() {
   return (
-    <section className="bg-teal text-paper">
+    <section className="bg-green-gradient text-paper">
       <div className="shell py-16 md:py-24">
         <div className="grid gap-x-10 gap-y-12 md:grid-cols-3">
           {pillars.map((p, i) => (

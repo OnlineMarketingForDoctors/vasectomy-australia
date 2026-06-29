@@ -94,6 +94,15 @@
     letter-spacing: -0.03em;
     font-variant-numeric: lining-nums;
   }
+
+  /* Rich green gradient for feature sections */
+  .bg-green-gradient {
+    background-color: #0e4a43;
+    background-image:
+      radial-gradient(115% 120% at 6% 4%, rgba(28, 111, 100, 0.62) 0%, rgba(28, 111, 100, 0) 55%),
+      radial-gradient(125% 135% at 100% 100%, rgba(8, 40, 36, 0.9) 0%, rgba(8, 40, 36, 0) 60%),
+      linear-gradient(135deg, #155a51 0%, #0e4a43 48%, #0a322d 100%);
+  }
 }
 
 /* Reveal-on-scroll (progressive enhancement; content is visible without JS). */

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { site, locations } from "@/lib/content";
+import { site } from "@/lib/content";
+import { locationStates } from "@/lib/locations";
 import { GoogleBadge } from "@/components/ui/GoogleBadge";
 
 export function Footer() {
@@ -70,7 +71,7 @@ export function Footer() {
               </li>
             </ul>
             <p className="mt-6 text-xs uppercase tracking-wider text-paper/45">
-              Clinics across {locations.states.length} states &amp; territories
+              Clinics across {locationStates.length} states &amp; territories
             </p>
           </div>
         </div>
