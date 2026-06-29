@@ -17,15 +17,30 @@ export function HowItWorks() {
   return (
     <section id="how" className="scroll-mt-24 bg-paper">
       <div className="shell py-24 md:py-32">
-        <div className="max-w-2xl">
-          <Reveal>
-            <p className="eyebrow text-clay">{howItWorks.eyebrow}</p>
-            <h2 className="mt-5 text-[length:var(--text-display)]">
-              {howItWorks.title}
-            </h2>
-            <p className="mt-7 text-lg leading-relaxed text-ink-soft">
-              {howItWorks.body}
-            </p>
+        <div className="grid items-center gap-y-10 lg:grid-cols-12 lg:gap-x-14">
+          <div className="lg:col-span-6">
+            <Reveal>
+              <p className="eyebrow text-clay">{howItWorks.eyebrow}</p>
+              <h2 className="mt-5 text-[length:var(--text-display)]">
+                {howItWorks.title}
+              </h2>
+              <p className="mt-7 text-lg leading-relaxed text-ink-soft">
+                {howItWorks.body}
+              </p>
+            </Reveal>
+          </div>
+
+          {/* Explainer video (streamed from Drive) */}
+          <Reveal delay={120} className="lg:col-span-6 lg:col-start-7">
+            <div className="relative aspect-video w-full overflow-hidden rounded-[3px] bg-teal-deep/10 ring-1 ring-line">
+              <iframe
+                src="https://drive.google.com/file/d/1HdK4ZIzeQ2Hs1Smu54hBPvHAxcwyqike/preview"
+                title="How a no-scalpel vasectomy works — Dr Geoff Cashion"
+                allow="autoplay; fullscreen"
+                allowFullScreen
+                className="absolute inset-0 h-full w-full"
+              />
+            </div>
           </Reveal>
         </div>
 
