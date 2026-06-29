@@ -21,9 +21,10 @@ export const images = {
     src: `${CDN}/hf_20260628_231437_cdc0b73c-b5be-42e9-821c-34c9835ac58f_min.webp`,
     alt: "Dr Geoff Cashion and Dr Matt Valentine, the doctors behind Vasectomy Australia",
   },
-  // Homepage hero — both doctors on the right, open negative space on the left (16:9)
+  // Homepage hero — both doctors on the right (Geoff right, Matt left),
+  // open negative space on the left (16:9)
   heroWide: {
-    src: `${CDN}/hf_20260629_061457_e4f93e66-2282-4485-99a0-65ee412cc054_min.webp`,
+    src: `${CDN}/hf_20260629_062843_119904b4-f867-49ec-a50c-474f05068b55_min.webp`,
     alt: "Dr Geoff Cashion and Dr Matt Valentine in a modern clinic",
   },
   // Dr Geoff environmental portrait (4:5)
