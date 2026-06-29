@@ -15,12 +15,13 @@ export const site = {
   email: "info@vasectomyaustralia.com.au",
   bookingUrl: "https://vasectomyaustralia.gettimely.com/",
   nav: [
-    { label: "Our Doctors", href: "#doctors" },
-    { label: "Why Us", href: "#why" },
-    { label: "How It Works", href: "#how" },
-    { label: "Fees", href: "#fees" },
-    { label: "Locations", href: "#locations" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Patient Info", href: "/patient-info" },
+    { label: "Our Doctors", href: "/our-doctors" },
+    { label: "Fees", href: "/fees" },
+    { label: "Locations", href: "/locations" },
+    { label: "Dr Referral", href: "/dr-referral" },
+    { label: "Contact", href: "/contact" },
+    { label: "Blog", href: "/blog" },
   ],
 };
 

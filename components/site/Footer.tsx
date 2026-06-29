@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { site, locations } from "@/lib/content";
 import { GoogleBadge } from "@/components/ui/GoogleBadge";
 
@@ -26,12 +27,12 @@ export function Footer() {
             <ul className="mt-5 space-y-3 text-sm">
               {site.nav.map((item) => (
                 <li key={item.href}>
-                  <a
+                  <Link
                     href={item.href}
                     className="text-paper/75 transition-colors hover:text-paper"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -75,11 +76,19 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col gap-4 border-t border-paper/15 pt-8 text-xs text-paper/55 md:flex-row md:items-center md:justify-between">
-          <p>
-            Powered by Online Marketing For Doctors · © {new Date().getFullYear()}{" "}
-            Vasectomy Australia. All rights reserved.
-          </p>
-          <p className="max-w-xl text-pretty">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <span>
+              Powered by Online Marketing For Doctors · ©{" "}
+              {new Date().getFullYear()} Vasectomy Australia
+            </span>
+            <Link href="/privacy-policy" className="text-paper/75 hover:text-paper">
+              Privacy Policy
+            </Link>
+            <Link href="/faq" className="text-paper/75 hover:text-paper">
+              FAQ
+            </Link>
+          </div>
+          <p className="max-w-md text-pretty">
             This website is general information only and is not medical advice. A
             vasectomy should be considered a permanent form of contraception.
           </p>
