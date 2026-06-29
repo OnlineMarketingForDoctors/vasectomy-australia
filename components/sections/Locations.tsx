@@ -19,7 +19,7 @@ export function Locations() {
         </div>
 
         <Reveal className="mt-14">
-          <LocationsTabs />
+          <LocationsTabs initialCount={3} />
         </Reveal>
       </div>
     </section>

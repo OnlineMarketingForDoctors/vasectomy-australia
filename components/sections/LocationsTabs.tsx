@@ -15,9 +15,19 @@ function GoogleG({ className = "" }: { className?: string }) {
   );
 }
 
-export function LocationsTabs() {
+/**
+ * State-tabbed clinic directory. Pass `initialCount` to collapse each tab to a
+ * single row with a "See more" toggle (used on the homepage); omit it to show
+ * every clinic (used on the /locations page).
+ */
+export function LocationsTabs({ initialCount }: { initialCount?: number }) {
   const [active, setActive] = useState(0);
+  const [expanded, setExpanded] = useState(false);
   const state = locationStates[active];
+
+  const limit = initialCount ?? state.clinics.length;
+  const canCollapse = state.clinics.length > limit;
+  const shown = expanded || !canCollapse ? state.clinics : state.clinics.slice(0, limit);
 
   return (
     <div>
@@ -29,7 +39,10 @@ export function LocationsTabs() {
             type="button"
             role="tab"
             aria-selected={i === active}
-            onClick={() => setActive(i)}
+            onClick={() => {
+              setActive(i);
+              setExpanded(false);
+            }}
             className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
               i === active
                 ? "bg-teal text-paper"
@@ -48,7 +61,7 @@ export function LocationsTabs() {
 
       {/* Location cards */}
       <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {state.clinics.map((c) => {
+        {shown.map((c) => {
           const q = encodeURIComponent(`${c.clinic}, ${c.address}`);
           const embedSrc = `https://www.google.com/maps?q=${q}&output=embed`;
           const gbpUrl = `https://www.google.com/maps/search/?api=1&query=${q}`;
@@ -98,6 +111,22 @@ export function LocationsTabs() {
           );
         })}
       </div>
+
+      {/* See more / less toggle */}
+      {canCollapse && (
+        <div className="mt-10 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setExpanded((v) => !v)}
+            className="inline-flex items-center gap-2 rounded-full border border-ink/20 px-7 py-3.5 text-sm font-medium text-ink transition-colors hover:border-ink/50"
+          >
+            {expanded
+              ? "Show fewer locations"
+              : `See all ${state.clinics.length} ${state.state} locations`}
+            <span className={`transition-transform ${expanded ? "rotate-180" : ""}`}>↓</span>
+          </button>
+        </div>
+      )}
     </div>
   );
 }
