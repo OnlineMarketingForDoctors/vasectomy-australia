@@ -3,8 +3,7 @@ import type { Metadata } from "next";
 import "@fontsource-variable/fraunces";
 import "@fontsource-variable/inter";
 import "./globals.css";
-import { Header } from "@/components/site/Header";
-import { Footer } from "@/components/site/Footer";
+import { SiteChrome } from "@/components/site/SiteChrome";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vasectomyaustralia.com.au"),
@@ -31,9 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en-AU" className="h-full antialiased">
       <body className="min-h-full flex flex-col bg-bone text-ink">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );
