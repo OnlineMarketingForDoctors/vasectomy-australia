@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { doctorsIntro, doctors, type Doctor } from "@/lib/content";
-import { images } from "@/lib/images";
+import { doctorsIntro as introContent } from "@/lib/content";
+import { images, type SiteImage } from "@/lib/images";
+import type { SiteDoctor } from "@/lib/site-data";
 import { Reveal } from "@/components/ui/Reveal";
 
-function DoctorBlock({ doctor, flip }: { doctor: Doctor; flip: boolean }) {
-  const img = images[doctor.image];
+function DoctorBlock({ doctor, flip }: { doctor: SiteDoctor; flip: boolean }) {
   return (
     <div className="grid items-center gap-y-8 lg:grid-cols-12 lg:gap-x-12">
       {/* Portrait */}
@@ -14,8 +14,8 @@ function DoctorBlock({ doctor, flip }: { doctor: Doctor; flip: boolean }) {
         <div className="relative">
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft">
             <Image
-              src={img.src}
-              alt={img.alt}
+              src={doctor.image.src}
+              alt={doctor.image.alt}
               fill
               sizes="(max-width: 1024px) 100vw, 42vw"
               className="object-cover object-top"
@@ -37,7 +37,7 @@ function DoctorBlock({ doctor, flip }: { doctor: Doctor; flip: boolean }) {
       {/* Bio */}
       <div className={`lg:col-span-6 ${flip ? "lg:order-1 lg:col-start-1" : "lg:col-start-7"}`}>
         <Reveal>
-          <p className="eyebrow text-clay">{doctor.region}</p>
+          <p className="eyebrow text-clay">{doctor.regions}</p>
           <h3 className="mt-4 text-[length:var(--text-headline)]">
             {doctor.name}
           </h3>
@@ -71,18 +71,26 @@ function DoctorBlock({ doctor, flip }: { doctor: Doctor; flip: boolean }) {
   );
 }
 
-export function Doctors() {
+export function Doctors({
+  intro = introContent,
+  wideImage = images.doctorsDiscussion,
+  list,
+}: {
+  intro?: typeof introContent;
+  wideImage?: SiteImage;
+  list: SiteDoctor[];
+}) {
   return (
     <section id="doctors" className="scroll-mt-24 bg-bone">
       <div className="shell py-24 md:py-32">
         <div className="max-w-3xl">
           <Reveal>
-            <p className="eyebrow text-clay">{doctorsIntro.eyebrow}</p>
+            <p className="eyebrow text-clay">{intro.eyebrow}</p>
             <h2 className="mt-5 text-[length:var(--text-display)]">
-              {doctorsIntro.title}
+              {intro.title}
             </h2>
             <p className="mt-7 text-lg leading-relaxed text-ink-soft">
-              {doctorsIntro.body}
+              {intro.body}
             </p>
           </Reveal>
         </div>
@@ -91,8 +99,8 @@ export function Doctors() {
         <Reveal delay={120}>
           <div className="relative mt-12 aspect-[16/9] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft md:mt-16">
             <Image
-              src={images.doctorsDiscussion.src}
-              alt={images.doctorsDiscussion.alt}
+              src={wideImage.src}
+              alt={wideImage.alt}
               fill
               sizes="100vw"
               className="object-cover"
@@ -101,7 +109,7 @@ export function Doctors() {
         </Reveal>
 
         <div className="mt-20 space-y-24 md:mt-24 md:space-y-32">
-          {doctors.map((doctor, i) => (
+          {list.map((doctor, i) => (
             <DoctorBlock key={doctor.id} doctor={doctor} flip={i % 2 === 1} />
           ))}
         </div>

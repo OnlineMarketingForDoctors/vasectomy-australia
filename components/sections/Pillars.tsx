@@ -1,12 +1,16 @@
-import { pillars } from "@/lib/content";
+import { pillars as pillarsContent } from "@/lib/content";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function Pillars() {
+export function Pillars({
+  items = pillarsContent,
+}: {
+  items?: { key: string; body: string }[];
+}) {
   return (
     <section className="bg-green-gradient text-paper">
       <div className="shell py-16 md:py-24">
         <div className="grid gap-x-10 gap-y-12 md:grid-cols-3">
-          {pillars.map((p, i) => (
+          {items.map((p, i) => (
             <Reveal key={p.key} delay={i * 100}>
               <div className="border-t border-paper/25 pt-6">
                 <h2 className="font-display text-3xl md:text-4xl">{p.key}</h2>

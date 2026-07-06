@@ -1,7 +1,12 @@
 import Image from "next/image";
-import { howItWorks } from "@/lib/content";
-import { images } from "@/lib/images";
+import { howItWorks as howContent } from "@/lib/content";
+import { images, type SiteImage } from "@/lib/images";
 import { Reveal } from "@/components/ui/Reveal";
+
+const DEFAULT_VIDEO =
+  "https://drive.google.com/file/d/1HdK4ZIzeQ2Hs1Smu54hBPvHAxcwyqike/preview";
+
+type HowContent = typeof howContent & { videoUrl?: string };
 
 function ChevronDown({ className = "" }: { className?: string }) {
   return (
@@ -11,8 +16,18 @@ function ChevronDown({ className = "" }: { className?: string }) {
   );
 }
 
-export function HowItWorks() {
-  const steps = howItWorks.steps;
+export function HowItWorks({
+  content = howContent,
+  videoUrl = DEFAULT_VIDEO,
+  imageTop = images.procedure,
+  imageBottom = images.anaesthetic,
+}: {
+  content?: HowContent;
+  videoUrl?: string;
+  imageTop?: SiteImage;
+  imageBottom?: SiteImage;
+}) {
+  const steps = content.steps;
 
   return (
     <section id="how" className="scroll-mt-24 bg-paper">
@@ -20,12 +35,12 @@ export function HowItWorks() {
         <div className="grid items-center gap-y-10 lg:grid-cols-12 lg:gap-x-14">
           <div className="lg:col-span-6">
             <Reveal>
-              <p className="eyebrow text-clay">{howItWorks.eyebrow}</p>
+              <p className="eyebrow text-clay">{content.eyebrow}</p>
               <h2 className="mt-5 text-[length:var(--text-display)]">
-                {howItWorks.title}
+                {content.title}
               </h2>
               <p className="mt-7 text-lg leading-relaxed text-ink-soft">
-                {howItWorks.body}
+                {content.body}
               </p>
             </Reveal>
           </div>
@@ -34,7 +49,7 @@ export function HowItWorks() {
           <Reveal delay={120} className="lg:col-span-6 lg:col-start-7">
             <div className="relative aspect-video w-full overflow-hidden rounded-[3px] bg-teal-deep/10 shadow-soft ring-1 ring-line">
               <iframe
-                src="https://drive.google.com/file/d/1HdK4ZIzeQ2Hs1Smu54hBPvHAxcwyqike/preview"
+                src={videoUrl}
                 title="How a no-scalpel vasectomy works — Dr Geoff Cashion"
                 allow="autoplay; fullscreen"
                 allowFullScreen
@@ -50,8 +65,8 @@ export function HowItWorks() {
             <Reveal>
               <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft">
                 <Image
-                  src={images.procedure.src}
-                  alt={images.procedure.alt}
+                  src={imageTop.src}
+                  alt={imageTop.alt}
                   fill
                   sizes="(max-width: 1024px) 100vw, 42vw"
                   className="object-cover"
@@ -61,8 +76,8 @@ export function HowItWorks() {
             <Reveal delay={120}>
               <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft">
                 <Image
-                  src={images.anaesthetic.src}
-                  alt={images.anaesthetic.alt}
+                  src={imageBottom.src}
+                  alt={imageBottom.alt}
                   fill
                   sizes="(max-width: 1024px) 100vw, 42vw"
                   className="object-cover"

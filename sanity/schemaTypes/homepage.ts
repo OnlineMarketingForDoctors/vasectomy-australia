@@ -78,6 +78,8 @@ export const homepage = defineType({
     defineField({ name: "howTitle", title: "Title", type: "text", rows: 2, group: "how" }),
     defineField({ name: "howBody", title: "Body", type: "text", rows: 3, group: "how" }),
     defineField({ name: "howVideoUrl", title: "Video URL / embed", type: "url", group: "how" }),
+    defineField({ name: "howImageTop", title: "Image (top)", type: "image", options: { hotspot: true }, group: "how" }),
+    defineField({ name: "howImageBottom", title: "Image (bottom)", type: "image", options: { hotspot: true }, group: "how" }),
     defineField({
       name: "howSteps",
       title: "Steps",
@@ -97,6 +99,7 @@ export const homepage = defineType({
 
     // Fees + Zip
     defineField({ name: "feesTitle", title: "Fees title", type: "string", group: "fees" }),
+    defineField({ name: "feesImage", title: "Fees image", type: "image", options: { hotspot: true }, group: "fees" }),
     valueLabel("feesRows", "Fee rows (label / value)"),
     defineField({ name: "feesTotalLabel", title: "Total label", type: "string", group: "fees" }),
     defineField({ name: "feesTotalValue", title: "Total value", type: "string", group: "fees" }),

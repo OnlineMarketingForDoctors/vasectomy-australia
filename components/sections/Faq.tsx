@@ -2,7 +2,11 @@ import { faqs, site } from "@/lib/content";
 import { Reveal } from "@/components/ui/Reveal";
 import { GoogleBadge } from "@/components/ui/GoogleBadge";
 
-export function Faq() {
+export function Faq({
+  items = faqs,
+}: {
+  items?: { q: string; a: string }[];
+}) {
   return (
     <section id="faq" className="scroll-mt-24 bg-sand">
       <div className="shell py-24 md:py-32">
@@ -27,7 +31,7 @@ export function Faq() {
           </div>
 
           <div className="lg:col-span-7 lg:col-start-6">
-            {faqs.map((faq, i) => (
+            {items.map((faq, i) => (
               <Reveal as="div" key={faq.q} delay={Math.min(i * 30, 200)}>
                 <details className="group border-t border-line/70 py-2 first:border-t-0">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5">

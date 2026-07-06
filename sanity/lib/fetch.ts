@@ -6,9 +6,12 @@ import { client } from "./client";
  * `withCms` so the site always renders — Sanity content when present, the
  * code-based defaults otherwise.
  */
-export async function sanityFetch<T>(query: string): Promise<T | null> {
+export async function sanityFetch<T>(
+  query: string,
+  params: Record<string, unknown> = {}
+): Promise<T | null> {
   try {
-    return await client.fetch<T>(query, {}, { next: { revalidate: 60 } });
+    return await client.fetch<T>(query, params, { next: { revalidate: 60 } });
   } catch {
     return null;
   }

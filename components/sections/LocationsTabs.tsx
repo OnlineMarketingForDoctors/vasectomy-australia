@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { locationStates } from "@/lib/locations";
+import { locationStates, type LocationState } from "@/lib/locations";
 import { site } from "@/lib/content";
 
 function GoogleG({ className = "" }: { className?: string }) {
@@ -20,10 +20,16 @@ function GoogleG({ className = "" }: { className?: string }) {
  * single row with a "See more" toggle (used on the homepage); omit it to show
  * every clinic (used on the /locations page).
  */
-export function LocationsTabs({ initialCount }: { initialCount?: number }) {
+export function LocationsTabs({
+  initialCount,
+  states = locationStates,
+}: {
+  initialCount?: number;
+  states?: LocationState[];
+}) {
   const [active, setActive] = useState(0);
   const [expanded, setExpanded] = useState(false);
-  const state = locationStates[active];
+  const state = states[active];
 
   const limit = initialCount ?? state.clinics.length;
   const canCollapse = state.clinics.length > limit;
@@ -33,7 +39,7 @@ export function LocationsTabs({ initialCount }: { initialCount?: number }) {
     <div>
       {/* State tabs */}
       <div className="flex flex-wrap gap-2 border-b border-line pb-5" role="tablist" aria-label="Clinic locations by state">
-        {locationStates.map((s, i) => (
+        {states.map((s, i) => (
           <button
             key={s.code}
             type="button"

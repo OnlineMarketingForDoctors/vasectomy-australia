@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { fees, zip, site } from "@/lib/content";
+import { site } from "@/lib/content";
 import { medicare } from "@/lib/pages";
 import { images } from "@/lib/images";
+import { getHomeContent } from "@/lib/site-data";
 import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/CtaBand";
 import { Reveal } from "@/components/ui/Reveal";
@@ -14,7 +15,10 @@ export const metadata: Metadata = {
     "One simple, transparent price for a no-scalpel vasectomy with Vasectomy Australia: $825 fee, less $228 Medicare rebate — just $597 out of pocket. Zip Money available.",
 };
 
-export default function FeesPage() {
+export default async function FeesPage() {
+  const home = await getHomeContent();
+  const { fees, zip } = home;
+
   return (
     <>
       <PageHero
@@ -31,7 +35,7 @@ export default function FeesPage() {
           <div className="grid items-stretch gap-10 lg:grid-cols-12 lg:gap-14">
             <Reveal className="lg:col-span-5">
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft lg:h-full">
-                <Image src={images.consult.src} alt={images.consult.alt} fill sizes="(max-width:1024px) 100vw, 42vw" className="object-cover" />
+                <Image src={home.feesImage.src} alt={home.feesImage.alt} fill sizes="(max-width:1024px) 100vw, 42vw" className="object-cover" />
               </div>
             </Reveal>
             <div className="lg:col-span-6 lg:col-start-7">

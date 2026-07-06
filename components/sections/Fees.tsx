@@ -1,17 +1,23 @@
 import Image from "next/image";
-import { fees, site } from "@/lib/content";
-import { images } from "@/lib/images";
+import { fees as feesContent, site } from "@/lib/content";
+import { images, type SiteImage } from "@/lib/images";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function Fees() {
+export function Fees({
+  content = feesContent,
+  image = images.consult,
+}: {
+  content?: typeof feesContent;
+  image?: SiteImage;
+}) {
   return (
     <section id="fees" className="scroll-mt-24 bg-bone">
       <div className="shell py-24 md:py-32">
         <div className="max-w-2xl">
           <Reveal>
-            <p className="eyebrow text-clay">{fees.eyebrow}</p>
+            <p className="eyebrow text-clay">{content.eyebrow}</p>
             <h2 className="mt-5 text-[length:var(--text-display)]">
-              {fees.title}
+              {content.title}
             </h2>
           </Reveal>
         </div>
@@ -21,8 +27,8 @@ export function Fees() {
           <Reveal className="lg:col-span-5">
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft lg:h-full">
               <Image
-                src={images.consult.src}
-                alt={images.consult.alt}
+                src={image.src}
+                alt={image.alt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover"
@@ -35,7 +41,7 @@ export function Fees() {
             <Reveal>
               <div className="border border-line bg-paper p-8 md:p-10">
                 <dl>
-                  {fees.rows.map((row) => (
+                  {content.rows.map((row) => (
                     <div
                       key={row.label}
                       className="flex items-baseline justify-between border-b border-line py-4 text-ink-soft"
@@ -46,15 +52,15 @@ export function Fees() {
                   ))}
                   <div className="flex items-baseline justify-between pt-6">
                     <dt className="text-sm font-semibold uppercase tracking-wider text-ink-soft">
-                      {fees.total.label}
+                      {content.total.label}
                     </dt>
                     <dd className="figure text-6xl text-teal">
-                      {fees.total.value}
+                      {content.total.value}
                     </dd>
                   </div>
                 </dl>
               </div>
-              <p className="mt-6 leading-relaxed text-ink-soft">{fees.terms}</p>
+              <p className="mt-6 leading-relaxed text-ink-soft">{content.terms}</p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
                   href={site.bookingUrl}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { faqAll } from "@/lib/pages";
 import { site } from "@/lib/content";
 import { images } from "@/lib/images";
+import { getFaqs } from "@/lib/site-data";
 import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/CtaBand";
 import { Reveal } from "@/components/ui/Reveal";
@@ -13,7 +13,8 @@ export const metadata: Metadata = {
     "Answers to the questions men actually ask about no-scalpel vasectomy — cost, recovery, effectiveness, the procedure, and more.",
 };
 
-export default function FaqPage() {
+export default async function FaqPage() {
+  const faqAll = await getFaqs();
   return (
     <>
       <PageHero

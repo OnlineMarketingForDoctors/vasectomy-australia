@@ -2,12 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { blogPosts } from "@/lib/pages";
-import { images } from "@/lib/images";
+import { getPost, getPostSlugs } from "@/lib/site-data";
 import { CtaBand } from "@/components/site/CtaBand";
+import { PortableBody } from "@/components/site/PortableBody";
 
-export function generateStaticParams() {
-  return blogPosts.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  const slugs = await getPostSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -16,7 +17,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
+  const post = await getPost(slug);
   if (!post) return { title: "Article" };
   return { title: post.title, description: post.excerpt };
 }
@@ -27,22 +28,24 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
+  const post = await getPost(slug);
   if (!post) notFound();
 
-  const date = new Date(post.date).toLocaleDateString("en-AU", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  const date = post.date
+    ? new Date(post.date).toLocaleDateString("en-AU", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+    : "";
 
   return (
     <>
       {/* Full-width hero */}
       <section className="relative isolate flex min-h-[52vh] items-end overflow-hidden bg-teal-deep text-paper md:min-h-[58vh]">
         <Image
-          src={images.treatmentRoom.src}
-          alt={images.treatmentRoom.alt}
+          src={post.cover.src}
+          alt={post.cover.alt}
           fill
           priority
           sizes="100vw"
@@ -71,28 +74,32 @@ export default async function BlogPostPage({
       <article className="bg-bone">
         <div className="shell">
           <div className="mx-auto max-w-3xl py-16 md:py-24">
-            <div className="space-y-5 text-lg leading-relaxed text-ink/90">
-              <p>
-                A vasectomy is one of the simplest, safest and most effective forms
-                of permanent contraception available — and at Vasectomy Australia,
-                it&apos;s all we do.
-              </p>
-              <p>
-                Every procedure is performed by Dr Geoff Cashion or Dr Matt Valentine
-                using a no-scalpel, open-ended technique under local anaesthetic.
-                Most men are in and out in about 15 minutes and back to normal within
-                a week.
-              </p>
-              <p className="rounded-[2px] border-l-2 border-clay bg-paper py-1 pl-5 text-ink-soft">
-                Full article content for this post will be managed in the CMS — this
-                is a styled template showing how each article will read.
-              </p>
-              <p>
-                If you have questions about whether a vasectomy is right for you, our
-                team offers free phone consultations. We&apos;re always happy to talk
-                it through, with no pressure either way.
-              </p>
-            </div>
+            {post.body ? (
+              <PortableBody value={post.body} />
+            ) : (
+              <div className="space-y-5 text-lg leading-relaxed text-ink/90">
+                <p>
+                  A vasectomy is one of the simplest, safest and most effective forms
+                  of permanent contraception available — and at Vasectomy Australia,
+                  it&apos;s all we do.
+                </p>
+                <p>
+                  Every procedure is performed by Dr Geoff Cashion or Dr Matt Valentine
+                  using a no-scalpel, open-ended technique under local anaesthetic.
+                  Most men are in and out in about 15 minutes and back to normal within
+                  a week.
+                </p>
+                <p className="rounded-[2px] border-l-2 border-clay bg-paper py-1 pl-5 text-ink-soft">
+                  Full article content for this post will be managed in the CMS — this
+                  is a styled template showing how each article will read.
+                </p>
+                <p>
+                  If you have questions about whether a vasectomy is right for you, our
+                  team offers free phone consultations. We&apos;re always happy to talk
+                  it through, with no pressure either way.
+                </p>
+              </div>
+            )}
 
             <div className="mt-12 border-t border-line pt-8">
               <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-teal hover:underline">

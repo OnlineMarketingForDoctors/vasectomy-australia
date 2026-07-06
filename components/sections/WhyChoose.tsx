@@ -1,9 +1,15 @@
 import Image from "next/image";
-import { whyChoose } from "@/lib/content";
-import { images } from "@/lib/images";
+import { whyChoose as whyContent } from "@/lib/content";
+import { images, type SiteImage } from "@/lib/images";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function WhyChoose() {
+export function WhyChoose({
+  content = whyContent,
+  image = images.geoffProcedure,
+}: {
+  content?: typeof whyContent;
+  image?: SiteImage;
+}) {
   return (
     <section id="why" className="scroll-mt-24 bg-green-gradient text-paper">
       <div className="shell py-24 md:py-32">
@@ -12,8 +18,8 @@ export function WhyChoose() {
           <Reveal className="lg:col-span-5">
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-teal-deep/40 shadow-soft">
               <Image
-                src={images.geoffProcedure.src}
-                alt={images.geoffProcedure.alt}
+                src={image.src}
+                alt={image.alt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover"
@@ -24,13 +30,13 @@ export function WhyChoose() {
           {/* Points */}
           <div className="lg:col-span-6 lg:col-start-7">
             <Reveal>
-              <p className="eyebrow text-clay-soft">{whyChoose.eyebrow}</p>
+              <p className="eyebrow text-clay-soft">{content.eyebrow}</p>
               <h2 className="mt-5 text-[length:var(--text-headline)] text-paper">
-                {whyChoose.title}
+                {content.title}
               </h2>
             </Reveal>
             <ul className="mt-8 grid gap-x-8 sm:grid-cols-2">
-              {whyChoose.points.map((point, i) => (
+              {content.points.map((point, i) => (
                 <Reveal as="li" key={point} delay={(i % 2) * 80}>
                   <div className="flex gap-3 border-t border-paper/15 py-4 text-paper/90">
                     <svg

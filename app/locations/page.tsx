@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { locationsIntro, locationStates } from "@/lib/locations";
+import { locationsIntro } from "@/lib/locations";
 import { images } from "@/lib/images";
+import { getClinicStates } from "@/lib/site-data";
 import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/CtaBand";
 import { LocationsTabs } from "@/components/sections/LocationsTabs";
@@ -11,8 +12,9 @@ export const metadata: Metadata = {
     "Find your nearest Vasectomy Australia clinic. No-scalpel vasectomy clinics across NSW, QLD, VIC, WA, SA and Tasmania — with addresses, maps and online booking.",
 };
 
-export default function LocationsPage() {
-  const totalClinics = locationStates.reduce((n, s) => n + s.clinics.length, 0);
+export default async function LocationsPage() {
+  const states = await getClinicStates();
+  const totalClinics = states.reduce((n, s) => n + s.clinics.length, 0);
 
   return (
     <>
@@ -26,7 +28,7 @@ export default function LocationsPage() {
 
       <section className="bg-bone">
         <div className="shell py-20 md:py-28">
-          <LocationsTabs />
+          <LocationsTabs states={states} />
         </div>
       </section>
 
