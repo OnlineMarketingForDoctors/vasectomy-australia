@@ -19,6 +19,18 @@ const components: PortableTextComponents = {
       </blockquote>
     ),
   },
+  list: {
+    bullet: ({ children }) => (
+      <ul className="my-5 list-disc space-y-2 pl-6 marker:text-clay">{children}</ul>
+    ),
+    number: ({ children }) => (
+      <ol className="my-5 list-decimal space-y-2 pl-6 marker:text-clay">{children}</ol>
+    ),
+  },
+  listItem: {
+    bullet: ({ children }) => <li className="leading-relaxed">{children}</li>,
+    number: ({ children }) => <li className="leading-relaxed">{children}</li>,
+  },
   marks: {
     strong: ({ children }) => <strong className="font-semibold text-ink">{children}</strong>,
     em: ({ children }) => <em>{children}</em>,

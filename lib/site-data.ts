@@ -337,6 +337,8 @@ type PostDoc = {
   category?: string;
   publishedAt?: string;
   coverImage?: SanityImageRef;
+  seoTitle?: string;
+  seoDescription?: string;
 };
 
 export async function getPosts(): Promise<SitePost[]> {
@@ -363,11 +365,15 @@ export async function getPosts(): Promise<SitePost[]> {
   }));
 }
 
-export type PostDetail = SitePost & { body: unknown[] | null };
+export type PostDetail = SitePost & {
+  body: unknown[] | null;
+  seoTitle: string;
+  seoDescription: string;
+};
 
 export async function getPost(slug: string): Promise<PostDetail | null> {
   const doc = await sanityFetch<PostDoc & { body?: unknown[] }>(
-    `*[_type == "post" && slug.current == $slug][0]{title, "slug": slug.current, excerpt, category, publishedAt, coverImage, body}`,
+    `*[_type == "post" && slug.current == $slug][0]{title, "slug": slug.current, excerpt, category, publishedAt, coverImage, body, seoTitle, seoDescription}`,
     { slug }
   );
   if (doc && doc.slug) {
@@ -379,6 +385,8 @@ export async function getPost(slug: string): Promise<PostDetail | null> {
       date: doc.publishedAt || "",
       cover: resolveImg(doc.coverImage, images.treatmentRoom, 2000),
       body: doc.body && doc.body.length ? doc.body : null,
+      seoTitle: doc.seoTitle || "",
+      seoDescription: doc.seoDescription || "",
     };
   }
   const code = blogPosts.find((p) => p.slug === slug);
@@ -391,6 +399,8 @@ export async function getPost(slug: string): Promise<PostDetail | null> {
     date: code.date,
     cover: images.treatmentRoom,
     body: null,
+    seoTitle: "",
+    seoDescription: "",
   };
 }
 

@@ -19,7 +19,10 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = await getPost(slug);
   if (!post) return { title: "Article" };
-  return { title: post.title, description: post.excerpt };
+  return {
+    title: post.seoTitle || post.title,
+    description: post.seoDescription || post.excerpt,
+  };
 }
 
 export default async function BlogPostPage({
