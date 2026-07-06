@@ -22,16 +22,19 @@ const components: PortableTextComponents = {
   marks: {
     strong: ({ children }) => <strong className="font-semibold text-ink">{children}</strong>,
     em: ({ children }) => <em>{children}</em>,
-    link: ({ children, value }) => (
-      <a
-        href={value?.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-teal underline underline-offset-2 hover:text-teal-deep"
-      >
-        {children}
-      </a>
-    ),
+    link: ({ children, value }) => {
+      const href: string = value?.href ?? "#";
+      const external = /^https?:\/\//.test(href);
+      return (
+        <a
+          href={href}
+          {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+          className="text-teal underline underline-offset-2 hover:text-teal-deep"
+        >
+          {children}
+        </a>
+      );
+    },
   },
   types: {
     image: ({ value }) => {
@@ -52,9 +55,15 @@ const components: PortableTextComponents = {
   },
 };
 
-export function PortableBody({ value }: { value: unknown[] }) {
+export function PortableBody({
+  value,
+  className = "space-y-5 text-lg leading-relaxed text-ink/90",
+}: {
+  value: unknown[];
+  className?: string;
+}) {
   return (
-    <div className="space-y-5 text-lg leading-relaxed text-ink/90">
+    <div className={className}>
       <PortableText value={value as never} components={components} />
     </div>
   );

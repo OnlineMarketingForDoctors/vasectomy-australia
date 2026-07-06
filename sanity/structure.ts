@@ -34,6 +34,7 @@ export const structure: StructureResolver = (S) =>
             ])
         ),
       S.divider(),
+      S.documentTypeListItem("locationPage").title("Location Pages"),
       S.documentTypeListItem("doctor").title("Doctors"),
       S.documentTypeListItem("clinic").title("Clinics"),
       S.documentTypeListItem("faq").title("FAQs"),

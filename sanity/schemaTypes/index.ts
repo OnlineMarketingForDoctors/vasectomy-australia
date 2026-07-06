@@ -12,6 +12,7 @@ import { spermTestPage } from "./spermTestPage";
 import { medicarePage } from "./medicarePage";
 import { drReferralPage } from "./drReferralPage";
 import { privacyPage } from "./privacyPage";
+import { locationPage } from "./locationPage";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -23,6 +24,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     medicarePage,
     drReferralPage,
     privacyPage,
+    locationPage,
     doctor,
     clinic,
     faq,

@@ -21,6 +21,7 @@ import {
 } from "@/lib/content";
 import { doctorProfiles, faqAll, blogPosts } from "@/lib/pages";
 import { locationsIntro, locationStates, type LocationState } from "@/lib/locations";
+import { locationFallbacks, type LocationView } from "@/lib/location-content";
 
 const HOW_VIDEO =
   "https://drive.google.com/file/d/1HdK4ZIzeQ2Hs1Smu54hBPvHAxcwyqike/preview";
@@ -397,6 +398,149 @@ export async function getPostSlugs(): Promise<string[]> {
   const codeSlugs = blogPosts.map((p) => p.slug);
   const docs = await sanityFetch<{ slug: string }[]>(
     `*[_type == "post" && defined(slug.current)]{"slug": slug.current}`
+  );
+  const sanitySlugs = (docs ?? []).map((d) => d.slug).filter(Boolean);
+  return [...new Set([...codeSlugs, ...sanitySlugs])];
+}
+
+/* -------------------------------------------------------- location pages */
+
+type LocationDoc = {
+  title?: string;
+  slug?: string;
+  eyebrow?: string;
+  lead?: string;
+  heroImage?: SanityImageRef;
+  seoTitle?: string;
+  seoDescription?: string;
+  introBody?: unknown[];
+  whatIsHeading?: string;
+  whatIsBody?: unknown[];
+  whatIsImage?: SanityImageRef;
+  recoveryHeading?: string;
+  recoveryBody?: unknown[];
+  whyHeading?: string;
+  whyBody?: unknown[];
+  whyImage?: SanityImageRef;
+  whyBadgeValue?: string;
+  whyBadgeLabel?: string;
+  areasHeading?: string;
+  areasBody?: unknown[];
+  nswClinics?: string[];
+  otherClinics?: string[];
+  mapQuery?: string;
+  areasOutro?: unknown[];
+  costHeading?: string;
+  costBody?: unknown[];
+  showFees?: boolean;
+  costTerms?: string;
+  faqHeading?: string;
+  faqs?: { question: string; answer: string[] }[];
+  ctaTitle?: string;
+};
+
+const LOCATION_QUERY = `*[_type == "locationPage" && slug.current == $slug][0]{
+  title, "slug": slug.current, eyebrow, lead, heroImage,
+  seoTitle, seoDescription,
+  introBody,
+  whatIsHeading, whatIsBody, whatIsImage,
+  recoveryHeading, recoveryBody,
+  whyHeading, whyBody, whyImage, whyBadgeValue, whyBadgeLabel,
+  areasHeading, areasBody, nswClinics, otherClinics, mapQuery, areasOutro,
+  costHeading, costBody, showFees, costTerms,
+  faqHeading, faqs[]{question, answer},
+  ctaTitle
+}`;
+
+function defaultLocation(slug: string): LocationView {
+  return {
+    slug,
+    title: slug,
+    eyebrow: "",
+    lead: "",
+    heroImage: images.reception,
+    seoTitle: "",
+    seoDescription: "",
+    introBody: [],
+    whatIsHeading: "What Is A Vasectomy?",
+    whatIsBody: [],
+    whatIsImage: images.consult,
+    recoveryHeading: "What Is Involved in The Recovery of a Vasectomy?",
+    recoveryBody: [],
+    whyHeading: "Why Choose Vasectomy Australia?",
+    whyBody: [],
+    whyImage: images.geoffPortrait,
+    whyBadgeValue: "",
+    whyBadgeLabel: "",
+    areasHeading: "Which Locations Are Serviced by Vasectomy Australia?",
+    areasBody: [],
+    nswClinics: [],
+    otherClinics: [],
+    mapQuery: "Australia",
+    areasOutro: [],
+    costHeading: "How Much Does the Vasectomy Procedure Cost?",
+    costBody: [],
+    showFees: true,
+    costTerms: "",
+    faqHeading: "Frequently Asked Questions",
+    faqs: [],
+    ctaTitle: "Book your vasectomy.",
+  };
+}
+
+export async function getLocationPage(slug: string): Promise<LocationView | null> {
+  const doc = await sanityFetch<LocationDoc>(LOCATION_QUERY, { slug });
+  const fb = locationFallbacks[slug];
+  if (!doc && !fb) return null;
+
+  const base = fb ?? defaultLocation(slug);
+  if (!doc) return base;
+
+  const body = (v: unknown[] | undefined, fbv: unknown[]) =>
+    Array.isArray(v) && v.length ? v : fbv;
+
+  return {
+    slug,
+    title: str(doc.title, base.title),
+    eyebrow: str(doc.eyebrow, base.eyebrow),
+    lead: str(doc.lead, base.lead),
+    heroImage: resolveImg(doc.heroImage, base.heroImage, 2000),
+    seoTitle: str(doc.seoTitle, base.seoTitle || base.title),
+    seoDescription: str(doc.seoDescription, base.seoDescription),
+    introBody: body(doc.introBody, base.introBody),
+    whatIsHeading: str(doc.whatIsHeading, base.whatIsHeading),
+    whatIsBody: body(doc.whatIsBody, base.whatIsBody),
+    whatIsImage: resolveImg(doc.whatIsImage, base.whatIsImage),
+    recoveryHeading: str(doc.recoveryHeading, base.recoveryHeading),
+    recoveryBody: body(doc.recoveryBody, base.recoveryBody),
+    whyHeading: str(doc.whyHeading, base.whyHeading),
+    whyBody: body(doc.whyBody, base.whyBody),
+    whyImage: resolveImg(doc.whyImage, base.whyImage),
+    whyBadgeValue: str(doc.whyBadgeValue, base.whyBadgeValue),
+    whyBadgeLabel: str(doc.whyBadgeLabel, base.whyBadgeLabel),
+    areasHeading: str(doc.areasHeading, base.areasHeading),
+    areasBody: body(doc.areasBody, base.areasBody),
+    nswClinics: arr(doc.nswClinics, base.nswClinics),
+    otherClinics: arr(doc.otherClinics, base.otherClinics),
+    mapQuery: str(doc.mapQuery, base.mapQuery),
+    areasOutro: body(doc.areasOutro, base.areasOutro),
+    costHeading: str(doc.costHeading, base.costHeading),
+    costBody: body(doc.costBody, base.costBody),
+    showFees: typeof doc.showFees === "boolean" ? doc.showFees : base.showFees,
+    costTerms: str(doc.costTerms, base.costTerms),
+    faqHeading: str(doc.faqHeading, base.faqHeading),
+    faqs:
+      doc.faqs && doc.faqs.length
+        ? doc.faqs.map((f) => ({ question: f.question, answer: f.answer ?? [] }))
+        : base.faqs,
+    ctaTitle: str(doc.ctaTitle, base.ctaTitle),
+  };
+}
+
+export async function getLocationSlugs(): Promise<string[]> {
+  const codeSlugs = Object.keys(locationFallbacks);
+  const docs = await sanityFetch<{ slug: string }[]>(
+    `*[_type == "locationPage" && defined(slug.current)]{"slug": slug.current}`
   );
   const sanitySlugs = (docs ?? []).map((d) => d.slug).filter(Boolean);
   return [...new Set([...codeSlugs, ...sanitySlugs])];
