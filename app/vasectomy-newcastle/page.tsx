@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { site } from "@/lib/content";
-import { images, type SiteImage } from "@/lib/images";
+import { type SiteImage } from "@/lib/images";
 import { getHomeContent } from "@/lib/site-data";
 import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/CtaBand";
@@ -11,10 +11,12 @@ import { Reveal } from "@/components/ui/Reveal";
 export const metadata: Metadata = {
   title: "Vasectomy Newcastle — No-Scalpel Vasectomy with Dr Geoff Cashion",
   description:
-    "A safe, affordable no-scalpel vasectomy in Newcastle, performed under local anaesthetic by Dr Geoff Cashion in under 30 minutes — with a quick recovery and same-day consultation.",
+    "A safe and easy vasectomy Newcastle men can have performed in under 30 minutes — under local anaesthetic, with a no-scalpel technique and a quick recovery.",
 };
 
-// Header + scene imagery supplied for this page (imported to the site CDN).
+const linkCls = "text-teal underline underline-offset-2 hover:text-teal-deep";
+
+// Images supplied with the source document, re-hosted on the site CDN.
 const heroImg: SiteImage = {
   src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3Ary2g06ZSWzxFoVWIP644Wm9ZG/0aeb80d6-b31b-4200-b52c-95ae24fd8bc4.png",
   alt: "A relaxed, confident man after his no-scalpel vasectomy in Newcastle",
@@ -22,6 +24,10 @@ const heroImg: SiteImage = {
 const familyImg: SiteImage = {
   src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3Ary2g06ZSWzxFoVWIP644Wm9ZG/0712b831-82a1-4f89-8acc-c2e14904dbe6.png",
   alt: "A father with his children — permanent contraception, complete peace of mind",
+};
+const geoffImg: SiteImage = {
+  src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3Ary2g06ZSWzxFoVWIP644Wm9ZG/28cdd0db-3840-4643-957e-c41b129a5d28.png",
+  alt: "Dr Geoff Cashion, Vasectomy Australia",
 };
 
 const quickFacts = [
@@ -31,42 +37,53 @@ const quickFacts = [
   { value: "~7 days", label: "back to usual activity" },
 ];
 
-const recovery = [
-  "You may feel a little sore, but this usually lasts only a few days.",
-  "Rest and wear supportive underwear to keep bruising and infection risk low.",
-  "Avoid aspirin, heavy lifting and strenuous movement for a week.",
-  "Desk-based work can usually be resumed the day after your procedure.",
-  "Avoid long periods of sitting, bike riding and contact sports for 2–3 weeks.",
-  "It takes about three months to clear sperm — keep using contraception until we confirm it's safe.",
-];
-
 const nswClinics = [
-  "Sydney — Enmore Medical Practice",
-  "Sydney — Neutral Bay Medical Centre",
-  "Sydney — Blacktown",
-  "Newcastle — Cooks Hill",
-  "Wollongong",
-  "Central Coast / Gosford",
+  "Neutral Bay Medical Centre",
+  "Enmore Medical Practice",
+  "Blacktown Doctors and Medical Centre",
+  "Newcastle – Cooks Hill Family Practice",
+  "Wollongong – Oche Medical Centre",
+  "Central Coast / Gosford – Gynaecology Centres of Australia",
+  "Canberra – Gynaecology Centres of Australia Queanbeyan",
 ];
 
-const faqs = [
+const otherClinics = [
+  "Melbourne – Gladstone Park Superclinic",
+  "Melbourne – Bay St Family Medical Centre Brighton",
+  "Berwick – Casey Superclinic",
+  "Brisbane – Taringa 7 Day Medical Centre",
+  "Logan – Logan Central Medical Centre",
+  "Morayfield – Morayfield 7 Day Medical Centre",
+  "Rockhampton – CQ Doctors",
+  "Mackay – City GP Superclinic",
+  "Adelaide – Trinity Garden Medical Centre",
+];
+
+const faqs: { q: string; a: string[] }[] = [
   {
     q: "Can my vasectomy be reversed?",
-    a: "While vasectomies can sometimes be reversed, we strongly recommend you don't proceed if you think there's a chance you'll want a reversal — a vasectomy should be thought of as permanent contraception. Reversals are expensive, not covered by Medicare, and can never be guaranteed to work.",
+    a: [
+      "While vasectomies can be reversed, we strongly recommend you do not undergo this procedure if you think there is a chance you'll want a reversal. Vasectomies should be thought of as permanent contraception.",
+      "Reversals are very expensive, not covered by Medicare, and cannot be guaranteed to work.",
+    ],
   },
   {
     q: "What will sex be like after my vasectomy?",
-    a: "You'll be able to masturbate comfortably a few days after your procedure, and full sexual function returns after roughly a week. There's no change to erections, desire or ejaculation, and you may notice only a slight difference in the volume of ejaculate. Keep using contraception until we confirm your semen is clear of sperm, at around the three-month mark.",
+    a: [
+      "You will be able to masturbate comfortably a few days after your procedure, and full sexual functions will be able to be resumed after roughly a week. There will be no change to erections, desire, or ejaculation post-procedure.",
+      "You may notice a slight difference in the volume of ejaculate, but for most men, their sex life improves post-vasectomy, courtesy of an almost zero risk of pregnancy or requirement of contraception.",
+      "It is vital, however, that you do not rely on your vasectomy as a form of birth control until we have confirmed it is safe to do so, roughly around the three months' mark post-procedure. This time is required to flush the sperm from your semen.",
+    ],
   },
   {
-    q: "What long-term risks should I consider?",
-    a: "The procedure performed by Dr Cashion is exceptionally safe. Large, well-conducted studies have shown a vasectomy creates no increased risk of long-term complications such as cancer.",
+    q: "What long-term risks should I be considering when undergoing a vasectomy?",
+    a: [
+      "The vasectomy procedure performed by Dr. Cashion is exceptionally safe, and it has been proven that the procedure creates no increased risks of long term complications such as cancer.",
+    ],
   },
 ];
 
-const clinicQuery = encodeURIComponent(
-  "Cooks Hill Healthcare Hub, 235 Darby St, Cooks Hill NSW 2300"
-);
+const clinicQuery = encodeURIComponent("Cooks Hill, Newcastle NSW 2300");
 
 export default async function VasectomyNewcastlePage() {
   const { fees } = await getHomeContent();
@@ -76,8 +93,8 @@ export default async function VasectomyNewcastlePage() {
       <PageHero
         crumb="Vasectomy Newcastle"
         eyebrow="Newcastle · Dr Geoff Cashion"
-        title="Vasectomy Newcastle."
-        lead="A safe and easy vasectomy Newcastle men can have performed in under 30 minutes — under local anaesthetic, with a no-scalpel technique that means a quicker recovery and a return to usual activities within about seven days."
+        title="Vasectomy Newcastle"
+        lead="Are you looking for a safe and easy vasectomy Newcastle men can have performed in under 30 minutes?"
         image={heroImg}
       />
 
@@ -87,17 +104,19 @@ export default async function VasectomyNewcastlePage() {
           <div className="grid gap-y-10 lg:grid-cols-12 lg:gap-x-14">
             <Reveal className="lg:col-span-7">
               <p className="text-lg leading-relaxed text-ink-soft">
-                Vasectomy Australia performs your procedure under local
-                anaesthetic using an open-ended, no-scalpel technique — proven to
-                have the lowest possible risk of complications. Dr Geoff Cashion
-                performs over 70 no-scalpel vasectomies every week, with one of
-                the lowest vasectomy costs Newcastle can offer.
+                Vasectomy Australia performs this procedure under local
+                anaesthetic with a{" "}
+                <Link href="/" className={linkCls}>
+                  no-scalpel vasectomy technique
+                </Link>{" "}
+                that allows for a quicker recovery, meaning you can resume usual
+                activities within seven days.
               </p>
               <p className="mt-5 leading-relaxed text-ink-soft">
-                You can have your consultation and procedure on the same day, or
-                speak with Dr Cashion first for a free phone consultation. Online
-                bookings are available across a range of locations around
-                Australia.
+                Dr. Geoff Cashion performs over 70 of these procedures per week
+                with one of the lowest vasectomy costs Newcastle can offer. His
+                open-ended no-scalpel technique is proven to have the lowest risk
+                of complications possible.
               </p>
             </Reveal>
             <div className="lg:col-span-5">
@@ -118,30 +137,43 @@ export default async function VasectomyNewcastlePage() {
         </div>
       </section>
 
-      {/* What is a vasectomy */}
+      {/* H2 — What Is A Vasectomy? */}
       <section className="bg-paper">
         <div className="shell py-20 md:py-28">
           <div className="grid items-center gap-y-10 lg:grid-cols-12 lg:gap-x-14">
             <Reveal className="lg:col-span-6">
-              <h2 className="text-[length:var(--text-headline)]">
-                What is a vasectomy?
+              <p className="eyebrow text-clay">The procedure</p>
+              <h2 className="mt-5 text-[length:var(--text-headline)]">
+                What Is A Vasectomy?
               </h2>
-              <p className="mt-5 leading-relaxed text-ink-soft">
-                A vasectomy is a male sterilisation technique that provides
-                permanent contraception. By closing the sperm-carrying tubes —
-                the vas deferens — sperm can no longer reach the urethra, so
-                there is no chance of pregnancy.
+              <p className="mt-6 leading-relaxed text-ink-soft">
+                The{" "}
+                <Link href="/vasectomy-procedure-explained" className={linkCls}>
+                  vasectomy procedure
+                </Link>{" "}
+                is a male sterilisation technique that creates a permanent method
+                of contraception via a surgical procedure. By closing the
+                sperm-carrying tubes called the vas deferens, sperm is no longer
+                able to access the urethra meaning there are no chances of possible
+                pregnancy.
               </p>
               <p className="mt-4 leading-relaxed text-ink-soft">
-                It&apos;s quick, performed in under 30 minutes, and needs no
-                general anaesthetic. Dr Cashion performs more than 4,000
-                vasectomies a year with a gentle technique that allows a fast
-                recovery and a return to work — all at an affordable price.
+                The vasectomy procedure is quick and able to be performed in under
+                30 minutes and does not require a general anaesthetic. Dr. Cashion
+                performs over 4,000 vasectomies a year with a gentle technique that
+                allows for a fast recovery and return to work all at an affordable
+                price.
               </p>
               <p className="mt-4 leading-relaxed text-ink-soft">
-                For men and couples who have decided their family is complete,
-                a vasectomy offers real peace of mind, with almost zero risk of
-                future pregnancy.
+                You will be able to have your consultation and the procedure on the
+                same day in our clinic or speak to Dr. Cashion for a free phone
+                consultation. Online bookings are also available for a range of
+                locations around Australia.
+              </p>
+              <p className="mt-4 leading-relaxed text-ink-soft">
+                For those who are no longer wanting to have children, the vasectomy
+                procedure provides peace of mind for both men and women, creating
+                almost zero risk of possible pregnancy.
               </p>
             </Reveal>
             <Reveal delay={120} className="lg:col-span-5 lg:col-start-8">
@@ -159,39 +191,50 @@ export default async function VasectomyNewcastlePage() {
         </div>
       </section>
 
-      {/* Recovery */}
+      {/* H3 — Recovery */}
       <section className="bg-green-gradient text-paper">
         <div className="shell py-16 md:py-24">
-          <div className="grid gap-y-10 lg:grid-cols-12 lg:gap-x-14">
-            <Reveal className="lg:col-span-5">
+          <div className="mx-auto max-w-3xl">
+            <Reveal>
               <p className="eyebrow text-clay-soft">Recovery</p>
-              <h2 className="mt-5 text-[length:var(--text-headline)] text-paper">
-                What&apos;s involved in recovery?
-              </h2>
-              <p className="mt-6 leading-relaxed text-paper/80">
-                Recovery is simple. Most men are back to normal within a few
-                days, and desk-based workers are often back the next day.
-              </p>
+              <h3 className="mt-5 font-display text-3xl md:text-[2.5rem]">
+                What Is Involved in The Recovery of a Vasectomy?
+              </h3>
+              <div className="mt-6 space-y-4 leading-relaxed text-paper/85">
+                <p>
+                  Recovery after the vasectomy procedure is very simple. You may
+                  feel a little sore; however, this will only last for a few days.
+                  It will take around three months for your semen to become clear
+                  of sperm, at which point you will no longer require any birth
+                  control methods during intercourse.
+                </p>
+                <p>
+                  There can be risks of bruising or infection; however, these are
+                  quite low and can be minimised by resting and wearing underpants
+                  that provide ample support.
+                </p>
+                <p>
+                  We recommend that you avoid aspirin as well as heavy lifting or
+                  extreme movement for a week after the vasectomy. Desk-based roles,
+                  however, should be able to be resumed the day after having your
+                  vasectomy.
+                </p>
+                <p>
+                  It would also be best to avoid sitting for long periods, bike
+                  riding, and contact sports for around 2-3 weeks.
+                </p>
+                <p>
+                  For those who are no longer wanting to have children, the
+                  vasectomy procedure provides peace of mind for both men and women,
+                  leaving almost zero risk of pregnancy once completed.
+                </p>
+              </div>
             </Reveal>
-            <div className="lg:col-span-6 lg:col-start-7">
-              <ul className="grid gap-x-8 sm:grid-cols-1">
-                {recovery.map((r, i) => (
-                  <Reveal as="li" key={r} delay={(i % 2) * 70}>
-                    <div className="flex gap-3 border-t border-paper/15 py-4 text-paper/90">
-                      <svg viewBox="0 0 20 20" className="mt-0.5 h-5 w-5 shrink-0 text-clay-soft" fill="none" aria-hidden>
-                        <path d="m5 10.5 3.2 3.2L15 7" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                      <span className="leading-snug">{r}</span>
-                    </div>
-                  </Reveal>
-                ))}
-              </ul>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Why Dr Geoff */}
+      {/* H3 — Why Choose Dr Geoff Cashion */}
       <section className="bg-bone">
         <div className="shell py-20 md:py-28">
           <div className="grid items-center gap-y-10 lg:grid-cols-12 lg:gap-x-14">
@@ -199,8 +242,8 @@ export default async function VasectomyNewcastlePage() {
               <div className="relative">
                 <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft">
                   <Image
-                    src={images.geoffPortrait.src}
-                    alt={images.geoffPortrait.alt}
+                    src={geoffImg.src}
+                    alt={geoffImg.alt}
                     fill
                     sizes="(max-width:1024px) 100vw, 42vw"
                     className="object-cover object-top"
@@ -216,55 +259,79 @@ export default async function VasectomyNewcastlePage() {
             </Reveal>
             <div className="lg:col-span-6 lg:col-start-7">
               <Reveal>
-                <p className="eyebrow text-clay">Why choose Dr Geoff Cashion</p>
-                <h2 className="mt-5 text-[length:var(--text-headline)]">
-                  One of Australia&apos;s busiest vasectomists.
-                </h2>
+                <p className="eyebrow text-clay">Your doctor</p>
+                <h3 className="mt-5 font-display text-3xl md:text-[2.5rem]">
+                  Why Choose Dr. Geoff Cashion?
+                </h3>
                 <div className="mt-6 space-y-4 leading-relaxed text-ink-soft">
                   <p>
-                    Dr Geoff Cashion has practised medicine for more than two
-                    decades and trained in Florida, USA under one of the world&apos;s
-                    leading vasectomy surgeons, Dr Doug Stein. He specialises in the
-                    no-scalpel technique across multiple locations and is one of the
-                    busiest in the field, performing around 70 vasectomies a week.
+                    Dr. Geoff Cashion has been practising medicine for over{" "}
+                    <Link href="/about" className={linkCls}>
+                      two decades
+                    </Link>{" "}
+                    and was trained in Florida, USA by one of the world&apos;s
+                    leading vasectomy surgeons, Dr. Doug Stein.
                   </p>
                   <p>
-                    Born in Brisbane, he graduated in Medicine from the University
-                    of Queensland in 2002 and is a Fellow of the Australian College
-                    of Rural and Remote Medicine (FACRRM) and the Royal College of
-                    Emergency Medicine (FRCEM). He is also a former medical educator
-                    and supervisor of GP registrars through James Cook University.
+                    Dr. Cashion specialises in the no-scalpel technique via multiple
+                    locations across Australia and is one of the busiest in the
+                    field, performing over 70 vasectomies a week. Many men have
+                    trusted his skills in ensuring they no longer have to worry
+                    about an unplanned pregnancy with their partner.
+                  </p>
+                  <p>
+                    Born in Brisbane, Dr. Cashion graduated from the University of
+                    Queensland in Medicine in 2002 and is a fellow of the{" "}
+                    <a
+                      href="https://www.acrrm.org.au/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={linkCls}
+                    >
+                      Australian College of Rural and Remote Medicine (FACRRM)
+                    </a>{" "}
+                    and the{" "}
+                    <a
+                      href="https://www.rcem.ac.uk/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={linkCls}
+                    >
+                      Royal College of Emergency Medicine (FRCEM)
+                    </a>
+                    . He is also a former medical educator and supervisor of general
+                    practice registrars through James Cook University.
                   </p>
                 </div>
-                <Link href="/our-doctors" className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-teal hover:underline">
-                  Read Dr Cashion&apos;s full profile <span className="text-clay">→</span>
-                </Link>
               </Reveal>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Newcastle clinic */}
+      {/* H3 — Which Locations Are Serviced */}
       <section className="bg-paper">
         <div className="shell py-20 md:py-28">
-          <div className="grid items-stretch gap-10 lg:grid-cols-12 lg:gap-14">
+          <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-14">
             <Reveal className="lg:col-span-6">
-              <p className="eyebrow text-clay">Your local clinic</p>
-              <h2 className="mt-5 text-[length:var(--text-headline)]">
-                Vasectomy Australia in Newcastle.
-              </h2>
+              <p className="eyebrow text-clay">Locations</p>
+              <h3 className="mt-5 font-display text-3xl md:text-[2.5rem]">
+                Which Locations Are Serviced by Vasectomy Australia?
+              </h3>
               <p className="mt-6 leading-relaxed text-ink-soft">
-                Dr Cashion performs the no-scalpel procedure at Cooks Hill in
-                Newcastle, along with clinics right across New South Wales —
-                including Sydney, Wollongong and the Central Coast — and around
-                the country.
+                Dr. Cashion performs the no-scalpel procedure in a range of{" "}
+                <Link href="/locations" className={linkCls}>
+                  vasectomy clinic locations across Australia
+                </Link>{" "}
+                with a focus on Sydney vasectomy services, including other areas
+                within New South Wales, Victoria, Queensland, and South Australia.
               </p>
-              <div className="mt-7 border-t border-line pt-6">
-                <p className="font-display text-xl">Cooks Hill Healthcare Hub</p>
-                <p className="mt-1 text-ink-soft">235 Darby St, Cooks Hill NSW 2300</p>
-              </div>
-              <ul className="mt-6 grid gap-x-8 gap-y-1 sm:grid-cols-2">
+
+              <p className="mt-8 font-medium text-ink">
+                For those interested in a New South Wales based clinic, the options
+                are as follows:
+              </p>
+              <ul className="mt-4 grid gap-x-8 gap-y-1 sm:grid-cols-2">
                 {nswClinics.map((c) => (
                   <li key={c} className="flex gap-2 py-1.5 text-sm text-ink-soft">
                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-clay" />
@@ -272,17 +339,30 @@ export default async function VasectomyNewcastlePage() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-7 flex flex-wrap gap-3">
-                <a href={site.bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full bg-teal px-7 py-3.5 text-sm font-medium text-paper transition-colors hover:bg-teal-deep">
-                  Book online
-                </a>
-                <Link href="/locations" className="inline-flex items-center rounded-full border border-ink/15 px-7 py-3.5 text-sm font-medium text-ink transition-colors hover:border-ink/40">
-                  See all locations
+
+              <p className="mt-8 font-medium text-ink">
+                Other clinics accessible across Australia include:
+              </p>
+              <ul className="mt-4 grid gap-x-8 gap-y-1 sm:grid-cols-2">
+                {otherClinics.map((c) => (
+                  <li key={c} className="flex gap-2 py-1.5 text-sm text-ink-soft">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-clay" />
+                    {c}
+                  </li>
+                ))}
+              </ul>
+
+              <p className="mt-8 leading-relaxed text-ink-soft">
+                Bookings can be made over the phone or{" "}
+                <Link href="/book-online" className={linkCls}>
+                  online by selecting the clinic you wish to visit
                 </Link>
-              </div>
+                .
+              </p>
             </Reveal>
+
             <Reveal delay={120} className="lg:col-span-6">
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[3px] border border-line bg-sand shadow-soft lg:h-full">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[3px] border border-line bg-sand shadow-soft lg:sticky lg:top-28">
                 <iframe
                   title="Map — Cooks Hill, Newcastle"
                   src={`https://www.google.com/maps?q=${clinicQuery}&output=embed`}
@@ -297,18 +377,27 @@ export default async function VasectomyNewcastlePage() {
         </div>
       </section>
 
-      {/* Fees */}
+      {/* H3 — Cost */}
       <section className="bg-bone">
         <div className="shell py-20 md:py-28">
           <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-14">
             <Reveal className="lg:col-span-5">
               <p className="eyebrow text-clay">Fees</p>
-              <h2 className="mt-5 text-[length:var(--text-display)]">
-                One simple price. Most of it covered by Medicare.
-              </h2>
+              <h3 className="mt-5 font-display text-3xl md:text-[2.5rem]">
+                How Much Does the Vasectomy Procedure Cost?
+              </h3>
               <p className="mt-6 leading-relaxed text-ink-soft">
-                No hidden fees and no surprises — a fraction of the cost of a
-                vasectomy in a private hospital.
+                The vasectomy cost Newcastle men have access to via Vasectomy
+                Australia is based on the fee recommended by the{" "}
+                <a
+                  href="https://ama.com.au/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={linkCls}
+                >
+                  Australian Medical Association (AMA)
+                </a>
+                :
               </p>
             </Reveal>
             <div className="lg:col-span-6 lg:col-start-7">
@@ -329,23 +418,27 @@ export default async function VasectomyNewcastlePage() {
                     </div>
                   </dl>
                 </div>
-                <p className="mt-6 leading-relaxed text-ink-soft">{fees.terms}</p>
+                <p className="mt-6 leading-relaxed text-ink-soft">
+                  We require that the total fee be payable on the day of your
+                  procedure. Your Medicare rebate can be credited to your account
+                  on the same day in most cases.
+                </p>
               </Reveal>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* H3 — FAQ */}
       <section className="bg-sand">
         <div className="shell py-20 md:py-28">
           <div className="grid gap-y-10 lg:grid-cols-12 lg:gap-x-14">
             <div className="lg:col-span-4">
               <Reveal>
                 <p className="eyebrow text-clay">FAQ</p>
-                <h2 className="mt-5 text-balance text-[length:var(--text-display)]">
-                  Newcastle vasectomy questions.
-                </h2>
+                <h3 className="mt-5 font-display text-3xl md:text-[2.5rem]">
+                  Frequently Asked Questions
+                </h3>
                 <p className="mt-6 leading-relaxed text-ink-soft">
                   Still unsure? Free phone consultations are available — call{" "}
                   <a href={site.phoneHref} className="font-medium text-teal hover:underline">
@@ -366,7 +459,11 @@ export default async function VasectomyNewcastlePage() {
                         <span className="absolute left-1/2 top-1/2 h-4 w-[1.6px] -translate-x-1/2 -translate-y-1/2 bg-current transition-transform duration-300 group-open:rotate-90 group-open:opacity-0" />
                       </span>
                     </summary>
-                    <div className="max-w-2xl pb-6 pr-8 leading-relaxed text-ink-soft">{faq.a}</div>
+                    <div className="max-w-2xl space-y-3 pb-6 pr-8 leading-relaxed text-ink-soft">
+                      {faq.a.map((p, j) => (
+                        <p key={j}>{p}</p>
+                      ))}
+                    </div>
                   </details>
                 </Reveal>
               ))}
