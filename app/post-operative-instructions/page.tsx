@@ -1,10 +1,10 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import { postOp } from "@/lib/pages";
 import { site } from "@/lib/content";
 import { images } from "@/lib/images";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
+import { sanityFetch, withCms } from "@/sanity/lib/fetch";
 
 export const metadata: Metadata = {
   title: "Post-Operative Instructions",
@@ -12,14 +12,24 @@ export const metadata: Metadata = {
     "Recovering from your no-scalpel vasectomy: wound care, pain management, activity restrictions, semen testing and 24-hour after-care support.",
 };
 
-export default function PostOpPage() {
+const QUERY = `*[_id == "postOpPage"][0]{
+  intro,
+  blocks[]{ title, body },
+  restrictions[]{ period, items },
+  warning,
+  closing
+}`;
+
+export default async function PostOpPage() {
+  const c = withCms(postOp, await sanityFetch<Partial<typeof postOp>>(QUERY));
+
   return (
     <>
       <PageHero
         crumb="Post-Operative Instructions"
         eyebrow="After your vasectomy"
         title="Looking after yourself afterwards."
-        lead={postOp.intro}
+        lead={c.intro}
         image={images.recovery}
       />
 
@@ -27,7 +37,7 @@ export default function PostOpPage() {
       <section className="bg-bone">
         <div className="shell py-20 md:py-28">
           <div className="grid gap-x-14 gap-y-2 md:grid-cols-2">
-            {postOp.blocks.map((b, i) => (
+            {c.blocks.map((b, i) => (
               <Reveal as="div" key={b.title} delay={(i % 2) * 80}>
                 <div className="border-t border-line py-7">
                   <h2 className="font-display text-2xl">{b.title}</h2>
@@ -47,7 +57,7 @@ export default function PostOpPage() {
               Take it easy — here&apos;s the timeline.
             </h2>
             <div className="mt-8 grid gap-8 sm:grid-cols-2">
-              {postOp.restrictions.map((r) => (
+              {c.restrictions.map((r) => (
                 <div key={r.period} className="border-t border-paper/25 pt-5">
                   <p className="figure text-4xl text-paper">{r.period}</p>
                   <p className="mt-3 text-paper/80">Avoid: {r.items}</p>
@@ -55,7 +65,7 @@ export default function PostOpPage() {
               ))}
             </div>
             <p className="mt-10 max-w-2xl border-l-2 border-clay-soft pl-5 text-paper/80">
-              {postOp.warning}
+              {c.warning}
             </p>
           </Reveal>
         </div>
@@ -83,7 +93,7 @@ export default function PostOpPage() {
             </Reveal>
             <Reveal delay={120} className="lg:col-span-5">
               <blockquote className="border-l-2 border-clay pl-6 font-display text-2xl leading-snug text-ink">
-                {postOp.closing}
+                {c.closing}
               </blockquote>
               <p className="mt-4 pl-6 text-sm text-ink-soft">— The team at Vasectomy Australia</p>
             </Reveal>

@@ -20,7 +20,17 @@ import {
   zip,
   finalCta,
 } from "../lib/content";
-import { doctorProfiles, faqAll, blogPosts } from "../lib/pages";
+import {
+  doctorProfiles,
+  faqAll,
+  blogPosts,
+  patientInfo,
+  postOp,
+  spermTest,
+  medicare,
+  drReferral,
+  privacy,
+} from "../lib/pages";
 import { locationsIntro, locationStates } from "../lib/locations";
 
 const client = createClient({
@@ -149,6 +159,60 @@ async function run() {
       category: p.category,
       publishedAt: new Date(p.date).toISOString(),
     });
+  });
+
+  // Static long-form pages (singletons)
+  tx.createOrReplace({
+    _id: "patientInfoPage",
+    _type: "patientInfoPage",
+    intro: patientInfo.intro,
+    consultation: patientInfo.consultation,
+    procedure: patientInfo.procedure,
+    preparing: patientInfo.preparing,
+  });
+
+  tx.createOrReplace({
+    _id: "postOpPage",
+    _type: "postOpPage",
+    intro: postOp.intro,
+    blocks: keyed(postOp.blocks),
+    restrictions: keyed(postOp.restrictions),
+    warning: postOp.warning,
+    closing: postOp.closing,
+  });
+
+  tx.createOrReplace({
+    _id: "spermTestPage",
+    _type: "spermTestPage",
+    intro: spermTest.intro,
+    important: spermTest.important,
+    options: keyed(spermTest.options),
+    note: spermTest.note,
+  });
+
+  tx.createOrReplace({
+    _id: "medicarePage",
+    _type: "medicarePage",
+    intro: medicare.intro,
+    selfTitle: medicare.selfTitle,
+    selfIntro: medicare.selfIntro,
+    methods: keyed(medicare.methods),
+    note: medicare.note,
+  });
+
+  tx.createOrReplace({
+    _id: "drReferralPage",
+    _type: "drReferralPage",
+    intro: drReferral.intro,
+    benefits: keyed(drReferral.benefits),
+    closing: drReferral.closing,
+  });
+
+  tx.createOrReplace({
+    _id: "privacyPage",
+    _type: "privacyPage",
+    intro: privacy.intro,
+    sections: keyed(privacy.sections),
   });
 
   await tx.commit();

@@ -3,6 +3,7 @@ import { spermTest } from "@/lib/pages";
 import { images } from "@/lib/images";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
+import { sanityFetch, withCms } from "@/sanity/lib/fetch";
 
 export const metadata: Metadata = {
   title: "Post-Vasectomy Semen Testing",
@@ -10,14 +11,23 @@ export const metadata: Metadata = {
     "How to confirm your vasectomy has worked — complete a Post-Vasectomy Semen Analysis (PVSA) at 3 months and 20 ejaculations, by mail-in kit or at a pathology lab.",
 };
 
-export default function SpermTestPage() {
+const QUERY = `*[_id == "spermTestPage"][0]{
+  intro,
+  important,
+  options[]{ title, body, cta{ label, href } },
+  note
+}`;
+
+export default async function SpermTestPage() {
+  const c = withCms(spermTest, await sanityFetch<Partial<typeof spermTest>>(QUERY));
+
   return (
     <>
       <PageHero
         crumb="Semen Testing"
         eyebrow="Confirming success"
         title="Post-vasectomy semen testing."
-        lead={spermTest.intro}
+        lead={c.intro}
         image={images.anaesthetic}
       />
 
@@ -25,12 +35,12 @@ export default function SpermTestPage() {
         <div className="shell py-20 md:py-28">
           <Reveal>
             <p className="max-w-3xl border-l-2 border-clay pl-5 font-display text-2xl leading-snug text-ink">
-              {spermTest.important}
+              {c.important}
             </p>
           </Reveal>
 
           <div className="mt-14 grid gap-8 lg:grid-cols-2">
-            {spermTest.options.map((o, i) => (
+            {c.options.map((o, i) => (
               <Reveal as="div" key={o.title} delay={i * 100}>
                 <div className="flex h-full flex-col border border-line bg-paper p-8">
                   <span className="figure text-3xl text-clay">{String(i + 1).padStart(2, "0")}</span>
@@ -50,7 +60,7 @@ export default function SpermTestPage() {
           </div>
 
           <Reveal>
-            <p className="mt-12 max-w-3xl leading-relaxed text-ink-soft">{spermTest.note}</p>
+            <p className="mt-12 max-w-3xl leading-relaxed text-ink-soft">{c.note}</p>
           </Reveal>
         </div>
       </section>

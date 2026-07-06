@@ -1,10 +1,10 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import { drReferral } from "@/lib/pages";
 import { images } from "@/lib/images";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { LeadForm } from "@/components/site/LeadForm";
+import { sanityFetch, withCms } from "@/sanity/lib/fetch";
 
 export const metadata: Metadata = {
   title: "Dr Referral — Refer a Patient",
@@ -12,14 +12,22 @@ export const metadata: Metadata = {
     "Refer your patient for a no-scalpel vasectomy. Dr Geoff Cashion and Dr Matt Valentine have performed over 23,000 vasectomies — quick, safe, effective and affordable.",
 };
 
-export default function DrReferralPage() {
+const QUERY = `*[_id == "drReferralPage"][0]{
+  intro,
+  benefits[]{ title, body },
+  closing
+}`;
+
+export default async function DrReferralPage() {
+  const c = withCms(drReferral, await sanityFetch<Partial<typeof drReferral>>(QUERY));
+
   return (
     <>
       <PageHero
         crumb="Dr Referral"
         eyebrow="For referring doctors"
         title="Refer your patient for a vasectomy."
-        lead={drReferral.intro}
+        lead={c.intro}
         image={images.ctaDoctors}
       />
 
@@ -32,7 +40,7 @@ export default function DrReferralPage() {
             </h2>
           </Reveal>
           <div className="mt-12 grid gap-x-12 gap-y-2 md:grid-cols-2">
-            {drReferral.benefits.map((b, i) => (
+            {c.benefits.map((b, i) => (
               <Reveal as="div" key={b.title} delay={(i % 2) * 80}>
                 <div className="flex gap-5 border-t border-line py-7">
                   <span className="figure text-3xl text-clay">{String(i + 1).padStart(2, "0")}</span>
@@ -46,7 +54,7 @@ export default function DrReferralPage() {
           </div>
           <Reveal>
             <p className="mt-12 max-w-2xl font-display text-2xl leading-snug text-teal">
-              {drReferral.closing}
+              {c.closing}
             </p>
           </Reveal>
         </div>

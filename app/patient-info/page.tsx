@@ -6,12 +6,20 @@ import { images } from "@/lib/images";
 import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/CtaBand";
 import { Reveal } from "@/components/ui/Reveal";
+import { sanityFetch, withCms } from "@/sanity/lib/fetch";
 
 export const metadata: Metadata = {
   title: "Patient Information — Your Vasectomy Explained",
   description:
     "Exactly what to expect from your no-scalpel vasectomy with Vasectomy Australia — your consultation, the procedure step by step, and how to prepare.",
 };
+
+const QUERY = `*[_id == "patientInfoPage"][0]{
+  intro,
+  consultation{ title, body, points },
+  procedure{ title, steps },
+  preparing{ title, points }
+}`;
 
 const resources = [
   { label: "Post-operative instructions", href: "/post-operative-instructions" },
@@ -20,14 +28,16 @@ const resources = [
   { label: "Fees & Medicare", href: "/fees" },
 ];
 
-export default function PatientInfoPage() {
+export default async function PatientInfoPage() {
+  const c = withCms(patientInfo, await sanityFetch<Partial<typeof patientInfo>>(QUERY));
+
   return (
     <>
       <PageHero
         crumb="Patient Info"
         eyebrow="Patient information"
         title="Your vasectomy, explained."
-        lead={patientInfo.intro}
+        lead={c.intro}
         image={images.treatmentRoom}
       />
 
@@ -37,13 +47,13 @@ export default function PatientInfoPage() {
           <div className="grid items-center gap-y-10 lg:grid-cols-12 lg:gap-x-14">
             <Reveal className="lg:col-span-6">
               <h2 className="text-[length:var(--text-headline)]">
-                {patientInfo.consultation.title}
+                {c.consultation.title}
               </h2>
               <p className="mt-5 leading-relaxed text-ink-soft">
-                {patientInfo.consultation.body}
+                {c.consultation.body}
               </p>
               <ul className="mt-6 space-y-3">
-                {patientInfo.consultation.points.map((p) => (
+                {c.consultation.points.map((p) => (
                   <li key={p} className="flex gap-3 border-t border-line pt-3 text-ink">
                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-clay" />
                     <span className="leading-snug">{p}</span>
@@ -66,7 +76,7 @@ export default function PatientInfoPage() {
           <div className="grid gap-y-10 lg:grid-cols-12 lg:gap-x-14">
             <Reveal className="lg:col-span-5">
               <h2 className="text-[length:var(--text-headline)]">
-                {patientInfo.procedure.title}
+                {c.procedure.title}
               </h2>
               <div className="relative mt-8 aspect-[3/2] w-full overflow-hidden rounded-[2px] bg-sand shadow-soft">
                 <Image src={images.geoffProcedure.src} alt={images.geoffProcedure.alt} fill sizes="(max-width:1024px) 100vw, 42vw" className="object-cover" />
@@ -74,7 +84,7 @@ export default function PatientInfoPage() {
             </Reveal>
             <div className="lg:col-span-6 lg:col-start-7">
               <ol>
-                {patientInfo.procedure.steps.map((step, i) => (
+                {c.procedure.steps.map((step, i) => (
                   <Reveal as="li" key={i} delay={i * 50}>
                     <div className="flex gap-5 border-t border-line py-5 first:border-t-0 first:pt-0">
                       <span className="figure text-2xl text-clay">{String(i + 1).padStart(2, "0")}</span>
@@ -99,10 +109,10 @@ export default function PatientInfoPage() {
             </Reveal>
             <Reveal className="lg:col-span-6 lg:order-1">
               <h2 className="text-[length:var(--text-headline)]">
-                {patientInfo.preparing.title}
+                {c.preparing.title}
               </h2>
               <ul className="mt-6 space-y-3">
-                {patientInfo.preparing.points.map((p) => (
+                {c.preparing.points.map((p) => (
                   <li key={p} className="flex gap-3 border-t border-line pt-3 text-ink">
                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-clay" />
                     <span className="leading-snug">{p}</span>

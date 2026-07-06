@@ -6,7 +6,27 @@ import { doctor } from "./doctor";
 import { faq } from "./faq";
 import { clinic } from "./clinic";
 import { post } from "./post";
+import { patientInfoPage } from "./patientInfoPage";
+import { postOpPage } from "./postOpPage";
+import { spermTestPage } from "./spermTestPage";
+import { medicarePage } from "./medicarePage";
+import { drReferralPage } from "./drReferralPage";
+import { privacyPage } from "./privacyPage";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [siteSettings, homepage, doctor, clinic, faq, post, blockContent],
+  types: [
+    siteSettings,
+    homepage,
+    patientInfoPage,
+    postOpPage,
+    spermTestPage,
+    medicarePage,
+    drReferralPage,
+    privacyPage,
+    doctor,
+    clinic,
+    faq,
+    post,
+    blockContent,
+  ],
 };
