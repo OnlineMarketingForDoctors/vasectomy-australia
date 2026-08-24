@@ -79,8 +79,16 @@ export function Footer() {
         <div className="mt-16 flex flex-col gap-4 border-t border-paper/15 pt-8 text-xs text-paper/55 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <span>
-              Powered by Online Marketing For Doctors · ©{" "}
-              {new Date().getFullYear()} Vasectomy Australia
+              Powered by{" "}
+              <a
+                href="https://onlinemarketingfordoctors.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-paper/75 underline-offset-2 transition-colors hover:text-paper hover:underline"
+              >
+                Online Marketing For Doctors
+              </a>{" "}
+              · © {new Date().getFullYear()} Vasectomy Australia
             </span>
             <Link href="/privacy-policy" className="text-paper/75 hover:text-paper">
               Privacy Policy

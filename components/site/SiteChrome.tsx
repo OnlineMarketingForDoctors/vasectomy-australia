@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+import { BackToTop } from "@/components/ui/BackToTop";
 
 /**
  * Renders the site header/footer around page content — except on the embedded
@@ -18,6 +19,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
+      <BackToTop />
     </>
   );
 }
