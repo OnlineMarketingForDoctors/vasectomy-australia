@@ -9,7 +9,7 @@ import { sanityFetch, withCms } from "@/sanity/lib/fetch";
 export const metadata: Metadata = {
   title: "Dr Referral — Refer a Patient",
   description:
-    "Refer your patient for a no-scalpel vasectomy. Dr Geoff Cashion and Dr Matt Valentine have performed over 23,000 vasectomies — quick, safe, effective and affordable.",
+    "Refer your patient for a no-scalpel vasectomy. Dr Geoff Cashion and Dr Matt Valentine have each performed over 25,000 vasectomies — quick, safe, effective and affordable.",
 };
 
 const QUERY = `*[_id == "drReferralPage"][0]{

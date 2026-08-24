@@ -86,7 +86,7 @@ export const doctorsIntro = {
   eyebrow: "Our doctors",
   title: "You're not booking a clinic. You're booking Geoff or Matt.",
   body:
-    "Both of our doctors trained under world-leading vasectomists and have dedicated their full-time practice to this one procedure — together performing over 9,000 cases a year. When you book with Vasectomy Australia, your vasectomy is done by Dr Geoff Cashion or Dr Matt Valentine personally, start to finish.",
+    "Both of our doctors trained under world-leading vasectomists and have dedicated their full-time practice to this one procedure — each having personally performed over 25,000 vasectomies, and together performing over 9,000 cases a year. When you book with Vasectomy Australia, your vasectomy is done by Dr Geoff Cashion or Dr Matt Valentine personally, start to finish.",
 };
 
 export type Doctor = {
@@ -120,7 +120,7 @@ export const doctors: Doctor[] = [
       "No-scalpel trained under Dr Doug Stein (Florida)",
       "Full-time vasectomist",
     ],
-    badge: { value: "4,000+", label: "vasectomies a year" },
+    badge: { value: "25,000+", label: "vasectomies performed" },
   },
   {
     id: "matt",
@@ -140,7 +140,7 @@ export const doctors: Doctor[] = [
       "US-trained, open-ended no-scalpel technique",
       "Performing vasectomies since 2008",
     ],
-    badge: { value: "Since 2008", label: "performing vasectomies" },
+    badge: { value: "25,000+", label: "vasectomies performed" },
   },
 ];
 

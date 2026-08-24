@@ -100,8 +100,8 @@ Born in Brisbane, Dr. Cashion graduated from the University of Queensland in Med
     src: `${CDN}/28cdd0db-3840-4643-957e-c41b129a5d28.png`,
     alt: "Dr Geoff Cashion, Vasectomy Australia",
   },
-  whyBadgeValue: "4,000+",
-  whyBadgeLabel: "vasectomies a year",
+  whyBadgeValue: "25,000+",
+  whyBadgeLabel: "vasectomies performed",
   areasHeading: "Which Locations Are Serviced by Vasectomy Australia?",
   areasBody: pt(
     `Dr. Cashion performs the no-scalpel procedure in a range of [vasectomy clinic locations across Australia](/locations) with a focus on Sydney vasectomy services, including other areas within New South Wales, Victoria, Queensland, and South Australia.`

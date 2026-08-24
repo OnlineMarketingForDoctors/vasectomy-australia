@@ -43,7 +43,7 @@ export const doctorProfiles: DoctorProfile[] = [
       { year: "2013", text: "Fellowship, The Royal College of Emergency Medicine" },
       { year: "2018", text: "Graduate Certificate in Occupational Medicine, Otago University" },
     ],
-    badge: { value: "4,000+", label: "vasectomies a year" },
+    badge: { value: "25,000+", label: "vasectomies performed" },
   },
   {
     id: "matt",
@@ -65,7 +65,7 @@ export const doctorProfiles: DoctorProfile[] = [
       { year: "2003", text: "Designated Aviation Medical Examiner, CASA" },
       { year: "2006", text: "Fellowship of the Royal Australian College of General Practitioners" },
     ],
-    badge: { value: "Since 2008", label: "performing vasectomies" },
+    badge: { value: "25,000+", label: "vasectomies performed" },
   },
 ];
 
@@ -191,7 +191,7 @@ export const medicare = {
 
 export const drReferral = {
   intro:
-    "Vasectomy Australia performs more no-scalpel vasectomies each year than any clinic in Australia. Dr Geoff Cashion (NSW, TAS & SA) and Dr Matt Valentine (QLD, VIC, WA & ACT) have together performed over 23,000 vasectomies, and are full-time dedicated specialists in the procedure.",
+    "Vasectomy Australia performs more no-scalpel vasectomies each year than any clinic in Australia. Dr Geoff Cashion (NSW, TAS & SA) and Dr Matt Valentine (QLD, VIC, WA & ACT) have each performed over 25,000 vasectomies — more than 50,000 combined — and are full-time dedicated specialists in the procedure.",
   benefits: [
     { title: "Quick", body: "Same-day consultation and procedure, most done in about 15 minutes." },
     { title: "Safe", body: "A gentle no-scalpel, open-ended technique for a quick recovery with minimal downtime." },
