@@ -29,7 +29,7 @@ export const images = {
   },
   // Dr Geoff environmental portrait (4:5)
   geoffPortrait: {
-    src: `${CDN}/hf_20260825_123711_14e8db29-9096-4c4e-ae3e-115ca71edd03_min.webp`,
+    src: `${CDN}/hf_20260825_162047_d0f9b68c-0fe8-4d84-b102-30bb5389c2cf_min.webp`,
     alt: "Dr Geoff Cashion, founder of Vasectomy Australia",
   },
   // Dr Matt environmental portrait (4:5)
