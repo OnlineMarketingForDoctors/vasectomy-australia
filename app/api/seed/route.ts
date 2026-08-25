@@ -66,7 +66,7 @@ export async function GET(request: Request) {
     email: "info@vasectomyaustralia.com.au",
     bookingUrl: "https://vasectomyaustralia.gettimely.com/",
     googleRating: "5.0",
-    googleCount: "361",
+    googleCount: "612",
   });
 
   tx.createOrReplace({

@@ -12,7 +12,7 @@ export const siteSettings = defineType({
     defineField({ name: "email", title: "Email", type: "string" }),
     defineField({ name: "bookingUrl", title: "Booking URL", type: "url" }),
     defineField({ name: "googleRating", title: "Google rating", type: "string", initialValue: "5.0" }),
-    defineField({ name: "googleCount", title: "Google review count", type: "string", initialValue: "361" }),
+    defineField({ name: "googleCount", title: "Google review count", type: "string", initialValue: "612" }),
     defineField({ name: "googleHref", title: "Google reviews URL", type: "url" }),
   ],
   preview: { prepare: () => ({ title: "Site Settings" }) },

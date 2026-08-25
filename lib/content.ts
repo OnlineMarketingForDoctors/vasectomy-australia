@@ -46,7 +46,7 @@ export const site = {
 
 export const google = {
   rating: "5.0",
-  count: "361",
+  count: "612",
   href: "https://www.google.com/search?q=vasectomy+australia+reviews",
 };
 

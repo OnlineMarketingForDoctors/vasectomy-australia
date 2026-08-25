@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { site } from "@/lib/content";
+import { site, google } from "@/lib/content";
 
 function Wordmark({ onClick }: { onClick?: () => void }) {
   return (
@@ -69,7 +69,7 @@ export function Header() {
             <span className="text-paper/55">Rated</span>
             <span className="font-semibold text-paper">5.0</span>
             <span className="text-[#FBBC05]">★★★★★</span>
-            <span className="text-paper/55">· 361 Google reviews</span>
+            <span className="text-paper/55">· {google.count} Google reviews</span>
           </div>
         </div>
       </div>
