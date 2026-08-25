@@ -44,8 +44,8 @@ export const images = {
   },
   // Consultation scene (3:2)
   consult: {
-    src: `${CDN}/hf_20260628_231521_b1428970-55ea-452c-ae14-ea3488d649c2_min.webp`,
-    alt: "A Vasectomy Australia doctor consulting with a patient",
+    src: `${CDN}/hf_20260825_163525_a32a66b5-4fee-4672-82c1-1289cc6b1b38_min.webp`,
+    alt: "Dr Geoff Cashion consulting with a patient at Vasectomy Australia",
   },
   // Both doctors, candid wide (16:9)
   ctaDoctors: {
@@ -64,7 +64,7 @@ export const images = {
   },
   // Dr Geoff in the procedure room (3:2)
   geoffProcedure: {
-    src: `${CDN}/hf_20260825_123711_be12e38f-1232-4821-90b5-5418e4fe6cd6_min.webp`,
+    src: `${CDN}/hf_20260825_163531_1aff592b-1632-4cf7-b1a6-310c72534bc7_min.webp`,
     alt: "Dr Geoff Cashion preparing in a modern procedure room",
   },
   // Both doctors together (16:9)

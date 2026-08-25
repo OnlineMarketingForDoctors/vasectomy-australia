@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { site, google } from "@/lib/content";
+import { site } from "@/lib/content";
 
 function Wordmark({ onClick }: { onClick?: () => void }) {
   return (
@@ -54,26 +54,6 @@ export function Header() {
 
   return (
     <div className="sticky top-0 z-50">
-      {/* Utility bar */}
-      <div className="hidden border-b border-teal-deep/20 bg-teal-deep text-paper/80 md:block">
-        <div className="shell flex h-9 items-center justify-between text-xs">
-          <div className="flex items-center gap-5">
-            <a href={site.phoneHref} className="font-medium text-paper hover:text-clay-soft">
-              {site.phoneLabel} <span className="text-paper/55">({site.phoneSub})</span>
-            </a>
-            <a href={`mailto:${site.email}`} className="hover:text-paper">
-              {site.email}
-            </a>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-paper/55">Rated</span>
-            <span className="font-semibold text-paper">5.0</span>
-            <span className="text-[#FBBC05]">★★★★★</span>
-            <span className="text-paper/55">· {google.count} Google reviews</span>
-          </div>
-        </div>
-      </div>
-
       {/* Main bar */}
       <header
         className={`transition-colors duration-300 ${

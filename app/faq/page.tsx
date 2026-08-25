@@ -23,6 +23,7 @@ export default async function FaqPage() {
         title="The questions men actually ask."
         lead="Everything you might be wondering about a no-scalpel vasectomy. Still unsure? Free phone consultations are available."
         image={images.geoffProcedure}
+        imagePosition="object-[50%_28%]"
       />
 
       <section className="bg-bone">

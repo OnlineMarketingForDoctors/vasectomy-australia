@@ -9,12 +9,15 @@ export function PageHero({
   lead,
   image,
   crumb,
+  imagePosition = "object-center",
 }: {
   eyebrow: string;
   title: string;
   lead?: string;
   image: SiteImage;
   crumb: string;
+  /** Tailwind object-position class controlling how the image is cropped. */
+  imagePosition?: string;
 }) {
   return (
     <section className="relative isolate flex min-h-[52vh] items-end overflow-hidden bg-teal-deep text-paper md:min-h-[60vh]">
@@ -24,7 +27,7 @@ export function PageHero({
         fill
         priority
         sizes="100vw"
-        className="-z-10 object-cover object-center"
+        className={`-z-10 object-cover ${imagePosition}`}
       />
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-teal-deep via-teal-deep/75 to-teal-deep/35" />
 
