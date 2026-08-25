@@ -18,23 +18,23 @@ const CDN =
 export const images = {
   // Hero — Geoff & Matt together (4:5)
   heroDoctors: {
-    src: `${CDN}/hf_20260628_231437_cdc0b73c-b5be-42e9-821c-34c9835ac58f_min.webp`,
+    src: `${CDN}/hf_20260825_123712_ad9012c5-97c1-4a34-a45d-b37a19e66857_min.webp`,
     alt: "Dr Geoff Cashion and Dr Matt Valentine, the doctors behind Vasectomy Australia",
   },
   // Homepage hero — both doctors on the right (Geoff right, Matt left),
   // open negative space on the left (16:9)
   heroWide: {
-    src: `${CDN}/hf_20260629_062843_119904b4-f867-49ec-a50c-474f05068b55_min.webp`,
+    src: `${CDN}/hf_20260825_123711_84abaa80-d426-4f43-b75e-b194fe217f4f_min.webp`,
     alt: "Dr Geoff Cashion and Dr Matt Valentine in a modern clinic",
   },
   // Dr Geoff environmental portrait (4:5)
   geoffPortrait: {
-    src: `${CDN}/hf_20260628_231513_0a72e0e2-c45d-41d9-81bc-fe972184568a_min.webp`,
+    src: `${CDN}/hf_20260825_123711_14e8db29-9096-4c4e-ae3e-115ca71edd03_min.webp`,
     alt: "Dr Geoff Cashion, founder of Vasectomy Australia",
   },
   // Dr Matt environmental portrait (4:5)
   mattPortrait: {
-    src: `${CDN}/hf_20260628_231515_830f7ff8-002b-4f8a-9072-c82dd86633f7_min.webp`,
+    src: `${CDN}/hf_20260825_123711_815de6fe-854e-4346-ae12-b471fe8c4ed1_min.webp`,
     alt: "Dr Matt Valentine, vasectomist at Vasectomy Australia",
   },
   // Procedure — gloved hands + instrument tray (3:2)
@@ -49,7 +49,7 @@ export const images = {
   },
   // Both doctors, candid wide (16:9)
   ctaDoctors: {
-    src: `${CDN}/hf_20260628_231524_8f1eae10-1b54-43dd-a8df-e952a64a26a1_min.webp`,
+    src: `${CDN}/hf_20260825_123711_4d98828f-7fe5-4d66-9cae-bbe5416720ec_min.webp`,
     alt: "Dr Geoff Cashion and Dr Matt Valentine at Vasectomy Australia",
   },
   // Clinic reception interior (3:2)
@@ -64,17 +64,17 @@ export const images = {
   },
   // Dr Geoff in the procedure room (3:2)
   geoffProcedure: {
-    src: `${CDN}/hf_20260629_000656_0de0f0b8-ef16-476c-9164-61181ceb34ba_min.webp`,
+    src: `${CDN}/hf_20260825_123711_be12e38f-1232-4821-90b5-5418e4fe6cd6_min.webp`,
     alt: "Dr Geoff Cashion preparing in a modern procedure room",
   },
   // Both doctors together (16:9)
   doctorsDiscussion: {
-    src: `${CDN}/hf_20260629_002842_76f2fd8e-1a97-4358-8094-f164edd5f064_min.webp`,
+    src: `${CDN}/hf_20260825_123712_d79a39c2-40fb-4147-9fdd-d5ec75a6bd42_min.webp`,
     alt: "Dr Geoff Cashion and Dr Matt Valentine at Vasectomy Australia",
   },
   // Both doctors in conversation (16:9)
   doctorsConversation: {
-    src: `${CDN}/hf_20260629_002844_027a542c-50f0-4eb3-a121-dc5ecba933c6_min.webp`,
+    src: `${CDN}/hf_20260825_123711_ab7cb65e-c146-427e-8452-c6f201f5aacf_min.webp`,
     alt: "Dr Geoff Cashion and Dr Matt Valentine in conversation",
   },
   // Bright, empty modern procedure room (16:9)
