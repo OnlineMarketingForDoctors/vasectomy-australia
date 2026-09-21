@@ -20,8 +20,6 @@ import {
   doctors as contentDoctors,
 } from "@/lib/content";
 import { doctorProfiles, faqAll, blogPosts } from "@/lib/pages";
-import { richBlogPosts } from "@/lib/blog-content";
-import { richPt } from "@/lib/pt";
 import { locationsIntro, locationStates, type LocationState } from "@/lib/locations";
 import { locationFallbacks, type LocationView } from "@/lib/location-content";
 
@@ -337,44 +335,21 @@ export type SitePost = {
   cover: SiteImage;
 };
 
-const time = (d: string) => {
-  const t = new Date(d).getTime();
-  return Number.isNaN(t) ? 0 : t;
-};
-
-const byNewest = (a: SitePost, b: SitePost) => time(b.date) - time(a.date);
-
-/** The full articles authored in lib/blog-content, as list entries. */
-function richPosts(): SitePost[] {
-  return richBlogPosts.map((p) => ({
+/**
+ * Posts available without Sanity: the placeholder set in lib/pages only.
+ * Full articles live in Sanity — lib/blog-content exists to seed them via
+ * /api/seed-posts and is deliberately not a rendering fallback, so the CMS
+ * stays the single source of truth for real articles.
+ */
+function codePosts(): SitePost[] {
+  return blogPosts.map((p, i) => ({
     slug: p.slug,
     title: p.title,
     excerpt: p.excerpt,
     category: p.category,
-    date: p.publishedAt,
-    cover: { src: p.coverUrl, alt: p.coverAlt },
+    date: p.date,
+    cover: POST_IMAGES[i % POST_IMAGES.length],
   }));
-}
-
-/**
- * Posts available without Sanity: the full articles plus the shorter
- * placeholder set. Keeping the real articles here means they stay published
- * even when Sanity is unreachable (outage, quota) rather than 404ing.
- */
-function codePosts(): SitePost[] {
-  const rich = richPosts();
-  const richSlugs = new Set(rich.map((p) => p.slug));
-  const rest: SitePost[] = blogPosts
-    .filter((p) => !richSlugs.has(p.slug))
-    .map((p, i) => ({
-      slug: p.slug,
-      title: p.title,
-      excerpt: p.excerpt,
-      category: p.category,
-      date: p.date,
-      cover: POST_IMAGES[i % POST_IMAGES.length],
-    }));
-  return [...rich, ...rest].sort(byNewest);
 }
 
 type PostDoc = {
@@ -395,7 +370,7 @@ export async function getPosts(): Promise<SitePost[]> {
   if (!docs || !docs.length) {
     return codePosts();
   }
-  const fromCms: SitePost[] = docs.map((p, i) => ({
+  return docs.map((p, i) => ({
     slug: p.slug || "",
     title: p.title || "",
     excerpt: p.excerpt || "",
@@ -403,11 +378,6 @@ export async function getPosts(): Promise<SitePost[]> {
     date: p.publishedAt || "",
     cover: resolveImg(p.coverImage, POST_IMAGES[i % POST_IMAGES.length], 1200),
   }));
-  // A full article that isn't in the CMS still belongs on the index, so it
-  // doesn't silently vanish from the listing while its page stays live.
-  const cmsSlugs = new Set(fromCms.map((p) => p.slug));
-  const missing = richPosts().filter((p) => !cmsSlugs.has(p.slug));
-  return missing.length ? [...fromCms, ...missing].sort(byNewest) : fromCms;
 }
 
 export type PostDetail = SitePost & {
@@ -432,20 +402,6 @@ export async function getPost(slug: string): Promise<PostDetail | null> {
       body: doc.body && doc.body.length ? doc.body : null,
       seoTitle: doc.seoTitle || "",
       seoDescription: doc.seoDescription || "",
-    };
-  }
-  const rich = richBlogPosts.find((p) => p.slug === slug);
-  if (rich) {
-    return {
-      slug: rich.slug,
-      title: rich.title,
-      excerpt: rich.excerpt,
-      category: rich.category,
-      date: rich.publishedAt,
-      cover: { src: rich.coverUrl, alt: rich.coverAlt },
-      body: richPt(rich.bodyMarkdown),
-      seoTitle: rich.seoTitle,
-      seoDescription: rich.seoDescription,
     };
   }
   const code = blogPosts.find((p) => p.slug === slug);
