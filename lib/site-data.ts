@@ -342,13 +342,11 @@ const time = (d: string) => {
   return Number.isNaN(t) ? 0 : t;
 };
 
-/**
- * Posts available without Sanity: the full articles in lib/blog-content plus
- * the shorter placeholder set. Keeping the real articles here means they stay
- * published even when Sanity is unreachable (outage, quota) rather than 404ing.
- */
-function codePosts(): SitePost[] {
-  const rich: SitePost[] = richBlogPosts.map((p) => ({
+const byNewest = (a: SitePost, b: SitePost) => time(b.date) - time(a.date);
+
+/** The full articles authored in lib/blog-content, as list entries. */
+function richPosts(): SitePost[] {
+  return richBlogPosts.map((p) => ({
     slug: p.slug,
     title: p.title,
     excerpt: p.excerpt,
@@ -356,6 +354,15 @@ function codePosts(): SitePost[] {
     date: p.publishedAt,
     cover: { src: p.coverUrl, alt: p.coverAlt },
   }));
+}
+
+/**
+ * Posts available without Sanity: the full articles plus the shorter
+ * placeholder set. Keeping the real articles here means they stay published
+ * even when Sanity is unreachable (outage, quota) rather than 404ing.
+ */
+function codePosts(): SitePost[] {
+  const rich = richPosts();
   const richSlugs = new Set(rich.map((p) => p.slug));
   const rest: SitePost[] = blogPosts
     .filter((p) => !richSlugs.has(p.slug))
@@ -367,7 +374,7 @@ function codePosts(): SitePost[] {
       date: p.date,
       cover: POST_IMAGES[i % POST_IMAGES.length],
     }));
-  return [...rich, ...rest].sort((a, b) => time(b.date) - time(a.date));
+  return [...rich, ...rest].sort(byNewest);
 }
 
 type PostDoc = {
@@ -388,7 +395,7 @@ export async function getPosts(): Promise<SitePost[]> {
   if (!docs || !docs.length) {
     return codePosts();
   }
-  return docs.map((p, i) => ({
+  const fromCms: SitePost[] = docs.map((p, i) => ({
     slug: p.slug || "",
     title: p.title || "",
     excerpt: p.excerpt || "",
@@ -396,6 +403,11 @@ export async function getPosts(): Promise<SitePost[]> {
     date: p.publishedAt || "",
     cover: resolveImg(p.coverImage, POST_IMAGES[i % POST_IMAGES.length], 1200),
   }));
+  // A full article that isn't in the CMS still belongs on the index, so it
+  // doesn't silently vanish from the listing while its page stays live.
+  const cmsSlugs = new Set(fromCms.map((p) => p.slug));
+  const missing = richPosts().filter((p) => !cmsSlugs.has(p.slug));
+  return missing.length ? [...fromCms, ...missing].sort(byNewest) : fromCms;
 }
 
 export type PostDetail = SitePost & {
