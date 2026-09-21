@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { drReferral } from "@/lib/pages";
 import { images } from "@/lib/images";
+import { getDoctors } from "@/lib/site-data";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { LeadForm } from "@/components/site/LeadForm";
@@ -20,6 +21,7 @@ const QUERY = `*[_id == "drReferralPage"][0]{
 
 export default async function DrReferralPage() {
   const c = withCms(drReferral, await sanityFetch<Partial<typeof drReferral>>(QUERY));
+  const registrations = (await getDoctors()).filter((d) => d.ahpra);
 
   return (
     <>
@@ -57,6 +59,15 @@ export default async function DrReferralPage() {
               {c.closing}
             </p>
           </Reveal>
+          {registrations.length ? (
+            <Reveal>
+              <p className="mt-8 text-xs leading-relaxed text-ink-soft">
+                {registrations
+                  .map((d) => `${d.name} — AHPRA Reg. ${d.ahpra}`)
+                  .join("  ·  ")}
+              </p>
+            </Reveal>
+          ) : null}
         </div>
       </section>
 

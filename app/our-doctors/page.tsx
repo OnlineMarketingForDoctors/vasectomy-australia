@@ -5,6 +5,7 @@ import { getDoctors, type SiteDoctor } from "@/lib/site-data";
 import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/CtaBand";
 import { Reveal } from "@/components/ui/Reveal";
+import { AhpraReg } from "@/components/ui/AhpraReg";
 
 export const metadata: Metadata = {
   title: "Our Doctors — Dr Geoff Cashion & Dr Matt Valentine",
@@ -46,6 +47,7 @@ function Profile({ doctor, flip }: { doctor: SiteDoctor; flip: boolean }) {
           <p className="mt-2 text-sm font-medium uppercase tracking-wider text-ink-soft">
             {doctor.role}
           </p>
+          <AhpraReg number={doctor.ahpra} className="mt-2" />
           <p className="mt-6 font-display text-2xl leading-snug text-teal">
             {doctor.lead}
           </p>

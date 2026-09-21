@@ -186,6 +186,8 @@ export type SiteDoctor = {
   name: string;
   role: string;
   regions: string;
+  /** AHPRA registration number — shown wherever the doctor is presented. */
+  ahpra: string;
   lead: string;
   bio: string[];
   personal: string;
@@ -201,6 +203,7 @@ type DoctorDoc = {
   name?: string;
   role?: string;
   regions?: string;
+  ahpra?: string;
   lead?: string;
   bio?: string[];
   personal?: string;
@@ -212,7 +215,7 @@ type DoctorDoc = {
 };
 
 const DOCTORS_QUERY = `*[_type == "doctor"] | order(order asc){
-  _id, "slug": slug.current, name, role, regions, lead, bio, personal,
+  _id, "slug": slug.current, name, role, regions, ahpra, lead, bio, personal,
   badgeValue, badgeLabel, credentials, qualifications[]{year, text}, image
 }`;
 
@@ -226,6 +229,7 @@ function codeDoctors(): SiteDoctor[] {
     name: d.name,
     role: d.role,
     regions: d.regions,
+    ahpra: d.ahpra,
     lead: d.lead,
     bio: d.bio,
     personal: d.personal,
@@ -247,6 +251,7 @@ export async function getDoctors(): Promise<SiteDoctor[]> {
       name: str(d.name, fallback?.name ?? ""),
       role: str(d.role, fallback?.role ?? ""),
       regions: str(d.regions, fallback?.regions ?? ""),
+      ahpra: str(d.ahpra, fallback?.ahpra ?? ""),
       lead: str(d.lead, fallback?.lead ?? ""),
       bio: arr(d.bio, fallback?.bio ?? []),
       personal: str(d.personal, fallback?.personal ?? ""),
@@ -432,6 +437,7 @@ type LocationDoc = {
   whyHeading?: string;
   whyBody?: unknown[];
   whyImage?: SanityImageRef;
+  whyAhpra?: string;
   whyBadgeValue?: string;
   whyBadgeLabel?: string;
   areasHeading?: string;
@@ -455,7 +461,7 @@ const LOCATION_QUERY = `*[_type == "locationPage" && slug.current == $slug][0]{
   introBody,
   whatIsHeading, whatIsBody, whatIsImage,
   recoveryHeading, recoveryBody,
-  whyHeading, whyBody, whyImage, whyBadgeValue, whyBadgeLabel,
+  whyHeading, whyBody, whyImage, whyAhpra, whyBadgeValue, whyBadgeLabel,
   areasHeading, areasBody, nswClinics, otherClinics, mapQuery, areasOutro,
   costHeading, costBody, showFees, costTerms,
   faqHeading, faqs[]{question, answer},
@@ -480,6 +486,7 @@ function defaultLocation(slug: string): LocationView {
     whyHeading: "Why Choose Vasectomy Australia?",
     whyBody: [],
     whyImage: images.geoffPortrait,
+    whyAhpra: "",
     whyBadgeValue: "",
     whyBadgeLabel: "",
     areasHeading: "Which Locations Are Serviced by Vasectomy Australia?",
@@ -526,6 +533,7 @@ export async function getLocationPage(slug: string): Promise<LocationView | null
     whyHeading: str(doc.whyHeading, base.whyHeading),
     whyBody: body(doc.whyBody, base.whyBody),
     whyImage: resolveImg(doc.whyImage, base.whyImage),
+    whyAhpra: str(doc.whyAhpra, base.whyAhpra),
     whyBadgeValue: str(doc.whyBadgeValue, base.whyBadgeValue),
     whyBadgeLabel: str(doc.whyBadgeLabel, base.whyBadgeLabel),
     areasHeading: str(doc.areasHeading, base.areasHeading),

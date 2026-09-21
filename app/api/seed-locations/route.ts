@@ -50,6 +50,7 @@ export async function GET(request: Request) {
       recoveryBody: c.recoveryBody,
       whyHeading: c.whyHeading,
       whyBody: c.whyBody,
+      whyAhpra: c.whyAhpra,
       whyBadgeValue: c.whyBadgeValue,
       whyBadgeLabel: c.whyBadgeLabel,
       areasHeading: c.areasHeading,

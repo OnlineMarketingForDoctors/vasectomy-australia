@@ -10,6 +10,13 @@ export const doctor = defineType({
     defineField({ name: "order", title: "Order", type: "number", initialValue: 0 }),
     defineField({ name: "role", title: "Role", type: "string" }),
     defineField({ name: "regions", title: "Regions covered", type: "string" }),
+    defineField({
+      name: "ahpra",
+      title: "AHPRA registration number",
+      description:
+        "Required by AHPRA wherever this doctor is named. Example: MED0001234567",
+      type: "string",
+    }),
     defineField({ name: "image", title: "Portrait", type: "image", options: { hotspot: true } }),
     defineField({ name: "lead", title: "Lead line", type: "text", rows: 2 }),
     defineField({

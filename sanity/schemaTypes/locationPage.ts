@@ -47,6 +47,13 @@ export const locationPage = defineType({
     defineField({ name: "whyHeading", title: "“Why choose” heading (H3)", type: "string", group: "content" }),
     defineField({ name: "whyBody", title: "“Why choose” body", type: "blockContent", group: "content" }),
     defineField({ name: "whyImage", title: "Doctor image", type: "image", options: { hotspot: true }, group: "content" }),
+    defineField({
+      name: "whyAhpra",
+      title: "Doctor’s AHPRA registration number",
+      description: "Shown under the “Why choose” heading. Example: MED0001234567",
+      type: "string",
+      group: "content",
+    }),
     defineField({ name: "whyBadgeValue", title: "Stat card — value", type: "string", group: "content" }),
     defineField({ name: "whyBadgeLabel", title: "Stat card — label", type: "string", group: "content" }),
 

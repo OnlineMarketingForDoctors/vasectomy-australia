@@ -10,9 +10,10 @@ export const runtime = "nodejs";
 export const maxDuration = 60;
 
 /**
- * Surgically patch the vasectomy-count stats into the live Sanity documents so
- * they match the code. Only the specific fields are set — everything else
- * (uploaded images, other edits) is left untouched.
+ * Surgically patch the vasectomy-count stats and AHPRA registration numbers
+ * into the live Sanity documents so they match the code. Only the specific
+ * fields are set — everything else (uploaded images, other edits) is left
+ * untouched.
  *   GET /api/patch-stats?secret=SEED_SECRET
  */
 export async function GET(request: Request) {
@@ -34,7 +35,7 @@ export async function GET(request: Request) {
 
   for (const d of doctorProfiles) {
     tx.patch(`doctor.${d.id}`, {
-      set: { badgeValue: d.badge.value, badgeLabel: d.badge.label },
+      set: { badgeValue: d.badge.value, badgeLabel: d.badge.label, ahpra: d.ahpra },
     });
     patched.push(`doctor.${d.id}`);
   }
@@ -45,7 +46,11 @@ export async function GET(request: Request) {
   const nc = locationFallbacks["vasectomy-newcastle"];
   if (nc) {
     tx.patch("locationPage.vasectomy-newcastle", {
-      set: { whyBadgeValue: nc.whyBadgeValue, whyBadgeLabel: nc.whyBadgeLabel },
+      set: {
+        whyBadgeValue: nc.whyBadgeValue,
+        whyBadgeLabel: nc.whyBadgeLabel,
+        whyAhpra: nc.whyAhpra,
+      },
     });
     patched.push("locationPage.vasectomy-newcastle");
   }

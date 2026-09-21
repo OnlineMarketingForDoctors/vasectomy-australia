@@ -12,6 +12,8 @@ export type DoctorProfile = {
   name: string;
   role: string;
   regions: string;
+  /** AHPRA registration number — required on advertising that names a practitioner. */
+  ahpra: string;
   image: "geoffPortrait" | "mattPortrait";
   lead: string;
   bio: string[];
@@ -26,6 +28,7 @@ export const doctorProfiles: DoctorProfile[] = [
     name: "Dr Geoff Cashion",
     role: "Founder & Lead Vasectomist",
     regions: "New South Wales · South Australia · Tasmania",
+    ahpra: "MED0001196484",
     image: "geoffPortrait",
     lead:
       "Performs more no-scalpel vasectomies than any other doctor in Australia — over 70 every week.",
@@ -50,6 +53,7 @@ export const doctorProfiles: DoctorProfile[] = [
     name: "Dr Matthew Valentine",
     role: "Vasectomist",
     regions: "Queensland · Victoria · Western Australia · ACT",
+    ahpra: "MED0000972761",
     image: "mattPortrait",
     lead:
       "Performing vasectomies since 2008, specialising in the lowest-risk open-ended no-scalpel technique.",

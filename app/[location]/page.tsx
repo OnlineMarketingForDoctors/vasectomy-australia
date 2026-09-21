@@ -7,6 +7,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/CtaBand";
 import { Reveal } from "@/components/ui/Reveal";
 import { PortableBody } from "@/components/site/PortableBody";
+import { AhpraReg } from "@/components/ui/AhpraReg";
 
 export async function generateStaticParams() {
   const slugs = await getLocationSlugs();
@@ -162,6 +163,7 @@ export default async function LocationRoute({
               <Reveal>
                 <p className="eyebrow text-clay">Your doctor</p>
                 <h3 className="mt-5 font-display text-3xl md:text-[2.5rem]">{loc.whyHeading}</h3>
+                <AhpraReg number={loc.whyAhpra} className="mt-3" />
                 <PortableBody
                   value={loc.whyBody}
                   className="mt-6 space-y-4 leading-relaxed text-ink-soft"

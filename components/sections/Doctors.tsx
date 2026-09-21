@@ -3,6 +3,7 @@ import { doctorsIntro as introContent } from "@/lib/content";
 import { images, type SiteImage } from "@/lib/images";
 import type { SiteDoctor } from "@/lib/site-data";
 import { Reveal } from "@/components/ui/Reveal";
+import { AhpraReg } from "@/components/ui/AhpraReg";
 
 function DoctorBlock({ doctor, flip }: { doctor: SiteDoctor; flip: boolean }) {
   return (
@@ -44,6 +45,7 @@ function DoctorBlock({ doctor, flip }: { doctor: SiteDoctor; flip: boolean }) {
           <p className="mt-2 text-sm font-medium uppercase tracking-wider text-ink-soft">
             {doctor.role}
           </p>
+          <AhpraReg number={doctor.ahpra} className="mt-2" />
           <p className="mt-6 font-display text-2xl leading-snug text-teal">
             {doctor.lead}
           </p>

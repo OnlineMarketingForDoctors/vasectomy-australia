@@ -26,6 +26,8 @@ export type LocationView = {
   whyHeading: string;
   whyBody: unknown[];
   whyImage: SiteImage;
+  /** AHPRA registration number of the doctor featured in this section. */
+  whyAhpra: string;
   whyBadgeValue: string;
   whyBadgeLabel: string;
   areasHeading: string;
@@ -100,6 +102,7 @@ Born in Brisbane, Dr. Cashion graduated from the University of Queensland in Med
     src: `${CDN}/28cdd0db-3840-4643-957e-c41b129a5d28.png`,
     alt: "Dr Geoff Cashion, Vasectomy Australia",
   },
+  whyAhpra: "MED0001196484",
   whyBadgeValue: "25,000+",
   whyBadgeLabel: "vasectomies performed",
   areasHeading: "Which Locations Are Serviced by Vasectomy Australia?",

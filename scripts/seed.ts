@@ -113,6 +113,7 @@ async function run() {
       order: i,
       role: d.role,
       regions: d.regions,
+      ahpra: d.ahpra,
       lead: d.lead,
       bio: d.bio,
       personal: d.personal,
