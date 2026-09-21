@@ -20,6 +20,8 @@ import {
   doctors as contentDoctors,
 } from "@/lib/content";
 import { doctorProfiles, faqAll, blogPosts } from "@/lib/pages";
+import { richBlogPosts } from "@/lib/blog-content";
+import { richPt } from "@/lib/pt";
 import { locationsIntro, locationStates, type LocationState } from "@/lib/locations";
 import { locationFallbacks, type LocationView } from "@/lib/location-content";
 
@@ -335,6 +337,39 @@ export type SitePost = {
   cover: SiteImage;
 };
 
+const time = (d: string) => {
+  const t = new Date(d).getTime();
+  return Number.isNaN(t) ? 0 : t;
+};
+
+/**
+ * Posts available without Sanity: the full articles in lib/blog-content plus
+ * the shorter placeholder set. Keeping the real articles here means they stay
+ * published even when Sanity is unreachable (outage, quota) rather than 404ing.
+ */
+function codePosts(): SitePost[] {
+  const rich: SitePost[] = richBlogPosts.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.excerpt,
+    category: p.category,
+    date: p.publishedAt,
+    cover: { src: p.coverUrl, alt: p.coverAlt },
+  }));
+  const richSlugs = new Set(rich.map((p) => p.slug));
+  const rest: SitePost[] = blogPosts
+    .filter((p) => !richSlugs.has(p.slug))
+    .map((p, i) => ({
+      slug: p.slug,
+      title: p.title,
+      excerpt: p.excerpt,
+      category: p.category,
+      date: p.date,
+      cover: POST_IMAGES[i % POST_IMAGES.length],
+    }));
+  return [...rich, ...rest].sort((a, b) => time(b.date) - time(a.date));
+}
+
 type PostDoc = {
   slug?: string;
   title?: string;
@@ -351,14 +386,7 @@ export async function getPosts(): Promise<SitePost[]> {
     `*[_type == "post"] | order(publishedAt desc){title, "slug": slug.current, excerpt, category, publishedAt, coverImage}`
   );
   if (!docs || !docs.length) {
-    return blogPosts.map((p, i) => ({
-      slug: p.slug,
-      title: p.title,
-      excerpt: p.excerpt,
-      category: p.category,
-      date: p.date,
-      cover: POST_IMAGES[i % POST_IMAGES.length],
-    }));
+    return codePosts();
   }
   return docs.map((p, i) => ({
     slug: p.slug || "",
@@ -394,6 +422,20 @@ export async function getPost(slug: string): Promise<PostDetail | null> {
       seoDescription: doc.seoDescription || "",
     };
   }
+  const rich = richBlogPosts.find((p) => p.slug === slug);
+  if (rich) {
+    return {
+      slug: rich.slug,
+      title: rich.title,
+      excerpt: rich.excerpt,
+      category: rich.category,
+      date: rich.publishedAt,
+      cover: { src: rich.coverUrl, alt: rich.coverAlt },
+      body: richPt(rich.bodyMarkdown),
+      seoTitle: rich.seoTitle,
+      seoDescription: rich.seoDescription,
+    };
+  }
   const code = blogPosts.find((p) => p.slug === slug);
   if (!code) return null;
   return {
@@ -410,7 +452,7 @@ export async function getPost(slug: string): Promise<PostDetail | null> {
 }
 
 export async function getPostSlugs(): Promise<string[]> {
-  const codeSlugs = blogPosts.map((p) => p.slug);
+  const codeSlugs = codePosts().map((p) => p.slug);
   const docs = await sanityFetch<{ slug: string }[]>(
     `*[_type == "post" && defined(slug.current)]{"slug": slug.current}`
   );
