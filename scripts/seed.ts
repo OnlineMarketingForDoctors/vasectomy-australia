@@ -64,6 +64,7 @@ async function run() {
     bookingUrl: "https://bookings.gettimely.com/vasectomyaustralia/book",
     googleRating: "5.0",
     googleCount: "612",
+    googleHref: "https://www.google.com/maps/place//data=!4m4!3m3!1s0x6b12b1c9ca9d1755%3A0x68aff2b280fac5dd!9m1!1i1",
   });
 
   tx.createOrReplace({
