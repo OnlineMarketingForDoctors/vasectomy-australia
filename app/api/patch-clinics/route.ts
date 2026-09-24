@@ -94,6 +94,36 @@ export async function GET(request: Request) {
     );
   }
 
+  // Clinic documents that no longer exist in the directory (e.g. a closed
+  // clinic). Reported by default; only removed when ?prune=1 is passed, so a
+  // Studio-added clinic can't be deleted by accident.
+  const codeKeys = new Set(
+    locationStates.flatMap((s) => s.clinics.map((c) => key(s.code, c.city)))
+  );
+  const orphans = docs.filter(
+    (d) => !codeKeys.has(key(d.stateCode || d.state || "", d.city || ""))
+  );
+  const label = (d: ClinicDoc) => `${d.stateCode || d.state || "?"} / ${d.city || "?"}`;
+  let deleted: string[] = [];
+  if (new URL(request.url).searchParams.get("prune") === "1" && orphans.length) {
+    const del = client.transaction();
+    for (const o of orphans) del.delete(o._id);
+    try {
+      await del.commit();
+      deleted = orphans.map(label);
+    } catch (err) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error: err instanceof Error ? err.message : "prune failed",
+          patched: patched.length,
+          orphans: orphans.map(label),
+        },
+        { status: 500 }
+      );
+    }
+  }
+
   // Separate commit so a missing siteSettings document can't roll back the clinics.
   let siteSettings: string;
   try {
@@ -107,6 +137,8 @@ export async function GET(request: Request) {
     ok: true,
     patched: patched.length,
     unmatched,
+    orphans: orphans.map(label),
+    deleted,
     siteSettings,
   });
 }

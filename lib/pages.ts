@@ -225,7 +225,7 @@ export const locationsByState: { state: string; doctor: string; cities: string[]
   {
     state: "Queensland",
     doctor: "Dr Matt Valentine",
-    cities: ["Brisbane", "Gold Coast", "Sunshine Coast", "Springfield", "Toowoomba", "Hervey Bay", "Rockhampton", "Gladstone", "Townsville"],
+    cities: ["Brisbane", "Gold Coast", "Sunshine Coast", "Springfield", "Toowoomba", "Rockhampton", "Gladstone", "Townsville"],
   },
   {
     state: "Victoria",
