@@ -288,6 +288,19 @@ type ClinicDoc = {
   gbpUrl?: string;
 };
 
+/**
+ * Google listing URLs from the code directory, keyed by city + clinic name.
+ * Seeded clinic documents predate the gbpUrl field, so a CMS clinic without
+ * one falls back to the code value rather than to a generic Maps search.
+ */
+const CODE_GBP = new Map<string, string>(
+  locationStates.flatMap((s) =>
+    s.clinics
+      .filter((c) => c.gbpUrl)
+      .map((c) => [`${c.city}|${c.clinic}`.toLowerCase(), c.gbpUrl as string] as [string, string])
+  )
+);
+
 export async function getClinicStates(): Promise<LocationState[]> {
   const docs = await sanityFetch<ClinicDoc[]>(
     `*[_type == "clinic"] | order(order asc){state, stateCode, doctor, city, name, address, gbpUrl}`
@@ -307,7 +320,8 @@ export async function getClinicStates(): Promise<LocationState[]> {
       city: c.city || "",
       clinic: c.name || "",
       address: c.address || "",
-      gbpUrl: c.gbpUrl || undefined,
+      gbpUrl:
+        c.gbpUrl || CODE_GBP.get(`${c.city || ""}|${c.name || ""}`.toLowerCase()),
     });
   }
   return [...groups.values()].sort((a, b) => {
