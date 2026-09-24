@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "next-sanity";
 import { apiVersion, dataset, projectId } from "@/sanity/env";
 import { doctorProfiles } from "@/lib/pages";
-import { doctorsIntro } from "@/lib/content";
+import { doctorsIntro, hero } from "@/lib/content";
 import { locationFallbacks } from "@/lib/location-content";
 
 export const dynamic = "force-dynamic";
@@ -40,8 +40,14 @@ export async function GET(request: Request) {
     patched.push(`doctor.${d.id}`);
   }
 
-  tx.patch("homepage", { set: { doctorsBody: doctorsIntro.body } });
-  patched.push("homepage.doctorsBody");
+  tx.patch("homepage", {
+    set: {
+      doctorsBody: doctorsIntro.body,
+      // The hero CTA href is CMS-backed, so the code value alone can't move it.
+      primaryCtaHref: hero.primaryCta.href,
+    },
+  });
+  patched.push("homepage.doctorsBody", "homepage.primaryCtaHref");
 
   const nc = locationFallbacks["vasectomy-newcastle"];
   if (nc) {
