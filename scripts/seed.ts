@@ -61,7 +61,7 @@ async function run() {
     phoneSub: "1800 764 763",
     phoneHref: "tel:1800764763",
     email: "info@vasectomyaustralia.com.au",
-    bookingUrl: "https://vasectomyaustralia.gettimely.com/",
+    bookingUrl: "https://bookings.gettimely.com/vasectomyaustralia/book",
     googleRating: "5.0",
     googleCount: "612",
   });

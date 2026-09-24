@@ -297,7 +297,7 @@ type ClinicDoc = {
  */
 const CODE_CLINICS = new Map<string, Clinic>(
   locationStates.flatMap((s) =>
-    s.clinics.map((c) => [`${c.city}|${c.clinic}`.toLowerCase(), c] as [string, Clinic])
+    s.clinics.map((c) => [`${s.code}|${c.city}`.toLowerCase(), c] as [string, Clinic])
   )
 );
 
@@ -316,9 +316,7 @@ export async function getClinicStates(): Promise<LocationState[]> {
       g = { state: c.state || code, code, doctor: c.doctor || "", clinics: [] };
       groups.set(code, g);
     }
-    const fromCode = CODE_CLINICS.get(
-      `${c.city || ""}|${c.name || ""}`.toLowerCase()
-    );
+    const fromCode = CODE_CLINICS.get(`${code}|${c.city || ""}`.toLowerCase());
     g.clinics.push({
       city: c.city || "",
       clinic: c.name || "",
