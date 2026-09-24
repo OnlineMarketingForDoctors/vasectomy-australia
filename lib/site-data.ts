@@ -20,7 +20,7 @@ import {
   doctors as contentDoctors,
 } from "@/lib/content";
 import { doctorProfiles, faqAll, blogPosts } from "@/lib/pages";
-import { locationsIntro, locationStates, type LocationState } from "@/lib/locations";
+import { locationsIntro, locationStates, type LocationState, type Clinic } from "@/lib/locations";
 import { locationFallbacks, type LocationView } from "@/lib/location-content";
 
 const HOW_VIDEO =
@@ -290,15 +290,14 @@ type ClinicDoc = {
 };
 
 /**
- * Google listing URLs from the code directory, keyed by city + clinic name.
- * Seeded clinic documents predate the gbpUrl field, so a CMS clinic without
- * one falls back to the code value rather than to a generic Maps search.
+ * The code clinic directory keyed by city + clinic name. Seeded clinic
+ * documents predate the gbpUrl/bookingUrl fields, so a CMS clinic without
+ * them falls back to the code entry rather than to a generic Maps search
+ * and the site-wide booking link.
  */
-const CODE_GBP = new Map<string, string>(
+const CODE_CLINICS = new Map<string, Clinic>(
   locationStates.flatMap((s) =>
-    s.clinics
-      .filter((c) => c.gbpUrl)
-      .map((c) => [`${c.city}|${c.clinic}`.toLowerCase(), c.gbpUrl as string] as [string, string])
+    s.clinics.map((c) => [`${c.city}|${c.clinic}`.toLowerCase(), c] as [string, Clinic])
   )
 );
 
@@ -317,13 +316,15 @@ export async function getClinicStates(): Promise<LocationState[]> {
       g = { state: c.state || code, code, doctor: c.doctor || "", clinics: [] };
       groups.set(code, g);
     }
+    const fromCode = CODE_CLINICS.get(
+      `${c.city || ""}|${c.name || ""}`.toLowerCase()
+    );
     g.clinics.push({
       city: c.city || "",
       clinic: c.name || "",
       address: c.address || "",
-      gbpUrl:
-        c.gbpUrl || CODE_GBP.get(`${c.city || ""}|${c.name || ""}`.toLowerCase()),
-      bookingUrl: c.bookingUrl || undefined,
+      gbpUrl: c.gbpUrl || fromCode?.gbpUrl,
+      bookingUrl: c.bookingUrl || fromCode?.bookingUrl,
     });
   }
   return [...groups.values()].sort((a, b) => {
