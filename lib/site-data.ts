@@ -285,11 +285,12 @@ type ClinicDoc = {
   city?: string;
   name?: string;
   address?: string;
+  gbpUrl?: string;
 };
 
 export async function getClinicStates(): Promise<LocationState[]> {
   const docs = await sanityFetch<ClinicDoc[]>(
-    `*[_type == "clinic"] | order(order asc){state, stateCode, doctor, city, name, address}`
+    `*[_type == "clinic"] | order(order asc){state, stateCode, doctor, city, name, address, gbpUrl}`
   );
   if (!docs || !docs.length) return locationStates;
 
@@ -306,6 +307,7 @@ export async function getClinicStates(): Promise<LocationState[]> {
       city: c.city || "",
       clinic: c.name || "",
       address: c.address || "",
+      gbpUrl: c.gbpUrl || undefined,
     });
   }
   return [...groups.values()].sort((a, b) => {

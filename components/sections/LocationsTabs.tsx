@@ -70,7 +70,10 @@ export function LocationsTabs({
         {shown.map((c) => {
           const q = encodeURIComponent(`${c.clinic}, ${c.address}`);
           const embedSrc = `https://www.google.com/maps?q=${q}&output=embed`;
-          const gbpUrl = `https://www.google.com/maps/search/?api=1&query=${q}`;
+          // The exact Google Business listing when we have one, otherwise a
+          // Maps search built from the clinic name + address.
+          const gbpUrl =
+            c.gbpUrl || `https://www.google.com/maps/search/?api=1&query=${q}`;
           return (
             <div
               key={`${c.city}-${c.clinic}`}
