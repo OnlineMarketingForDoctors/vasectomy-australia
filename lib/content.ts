@@ -55,7 +55,7 @@ export const hero = {
   title: "Safe, effective and affordable no-scalpel vasectomy.",
   lead:
     "Australia's most trusted vasectomists. Every procedure is performed by Geoff or Matt themselves — under local anaesthetic, in about 15 minutes, with a greater than 99% success rate.",
-  primaryCta: { label: "Book online", href: "https://vasectomyaustralia.gettimely.com/" },
+  primaryCta: { label: "Book online", href: "https://bookings.gettimely.com/vasectomyaustralia/book" },
   secondaryCta: { label: "Meet Geoff & Matt", href: "#doctors" },
   microStats: [
     { value: "9,000+", label: "procedures a year" },
@@ -210,7 +210,7 @@ export const zip = {
   title: "Vasectomy Australia now accepts Zip Money.",
   body:
     "Need a hand spreading the cost? You can now use Zip Money to pay for your procedure — apply and book in minutes.",
-  primaryCta: { label: "Book using Zip Money", href: "https://vasectomyaustralia.gettimely.com/" },
+  primaryCta: { label: "Book using Zip Money", href: "https://bookings.gettimely.com/vasectomyaustralia/book" },
   secondaryCta: { label: "Sign up for Zip", href: "https://zip.co/au/zip-money" },
 };
 
@@ -315,6 +315,6 @@ export const finalCta = {
   title: "Ready to book now?",
   body:
     "It's quicker, calmer and easier than you're imagining — and you'll be in the hands of two of the most experienced vasectomists in the country. Free phone consultations are available.",
-  primaryCta: { label: "Book online", href: "https://vasectomyaustralia.gettimely.com/" },
+  primaryCta: { label: "Book online", href: "https://bookings.gettimely.com/vasectomyaustralia/book" },
   secondaryCta: { label: "See clinic locations", href: "#locations" },
 };

@@ -98,7 +98,7 @@ For men who are certain they've completed their families or don't wish to have c
 
 If you're ready to explore your options for permanent male contraception, a no-scalpel vasectomy may be the solution you've been looking for. With fewer complications, a faster recovery and no stitches, it's a modern approach to a time-tested procedure.
 
-[Book online now](https://vasectomyaustralia.gettimely.com) or call 1800 SNIPME to speak with our team.
+[Book online now](https://bookings.gettimely.com/vasectomyaustralia/book) or call 1800 SNIPME to speak with our team.
 
 No referral. No pressure. Just professional, personalised care.
 
