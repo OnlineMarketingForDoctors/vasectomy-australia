@@ -71,7 +71,7 @@ export function Footer() {
               </li>
             </ul>
             <p className="mt-6 text-xs uppercase tracking-wider text-paper/45">
-              Clinics across {locationStates.length} states &amp; territories
+              {`Clinics across ${locationStates.length} states & territories`}
             </p>
           </div>
         </div>
