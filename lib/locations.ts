@@ -61,7 +61,7 @@ export const locationStates: LocationState[] = [
     code: "QLD",
     doctor: "Dr Matt Valentine",
     clinics: [
-      { city: "Brisbane", clinic: "Vasectomy Clinic Brisbane", address: "5/23 Glen Affric St, The Gap QLD 4061", gbpUrl: "https://g.page/r/CcbnOQE02fxCEBM", bookingUrl: "https://bookings.gettimely.com/vasectomyaustralia/bb/book?location=417351&product=5494631%3ASV&staff=459829" },
+      { city: "Brisbane", clinic: "Vasectomy Clinic Brisbane", address: "Shop 1, 183 Given Terrace, QLD 4064", gbpUrl: "https://g.page/r/CcbnOQE02fxCEBM", bookingUrl: "https://bookings.gettimely.com/vasectomyaustralia/bb/book?location=417351&product=5494631%3ASV&staff=459829" },
       { city: "Gold Coast", clinic: "Robina Medical & Dental Centre", address: "1 Campus Cres, Robina QLD 4226", gbpUrl: "https://g.page/r/Cc7-HCs0mXHUEBM", bookingUrl: "https://bookings.gettimely.com/vasectomyaustralia/bb/book?location=271087&product=2986617%3ASV&staff=459829" },
       { city: "Sunshine Coast", clinic: "Pulse Oceanside Medical", address: "Suite 605, 11 Eccles Blvd, Birtinya QLD 4575", gbpUrl: "https://g.page/r/CSb7llaj9qnnEBM", bookingUrl: "https://bookings.gettimely.com/vasectomyaustralia/bb/book?location=306417&product=3603528%3ASV&staff=459829" },
       { city: "Springfield", clinic: "Springfield Doctors", address: "95 Southern Cross Cct, Springfield QLD 4300", gbpUrl: "https://g.page/r/CaErDUnoTaXSEBM", bookingUrl: "https://bookings.gettimely.com/vasectomyaustralia/bb/book?location=288868&product=3286472%3ASV&staff=459829" },
