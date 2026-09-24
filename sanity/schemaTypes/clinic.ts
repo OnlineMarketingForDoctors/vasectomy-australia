@@ -29,6 +29,12 @@ export const clinic = defineType({
     defineField({ name: "name", title: "Clinic name", type: "string", validation: (r) => r.required() }),
     defineField({ name: "address", title: "Address", type: "string" }),
     defineField({ name: "gbpUrl", title: "Google Business listing URL", type: "url" }),
+    defineField({
+      name: "bookingUrl",
+      title: "Timely booking URL",
+      description: "Booking link for this clinic. Leave blank to use the site-wide booking link.",
+      type: "url",
+    }),
     defineField({ name: "learnMoreUrl", title: "Learn more URL", type: "url" }),
     defineField({ name: "order", title: "Order", type: "number", initialValue: 0 }),
   ],

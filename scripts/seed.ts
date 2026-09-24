@@ -146,6 +146,7 @@ async function run() {
         name: c.clinic,
         address: c.address,
         gbpUrl: c.gbpUrl,
+        bookingUrl: c.bookingUrl,
         order: j,
       });
     });

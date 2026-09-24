@@ -286,6 +286,7 @@ type ClinicDoc = {
   name?: string;
   address?: string;
   gbpUrl?: string;
+  bookingUrl?: string;
 };
 
 /**
@@ -303,7 +304,7 @@ const CODE_GBP = new Map<string, string>(
 
 export async function getClinicStates(): Promise<LocationState[]> {
   const docs = await sanityFetch<ClinicDoc[]>(
-    `*[_type == "clinic"] | order(order asc){state, stateCode, doctor, city, name, address, gbpUrl}`
+    `*[_type == "clinic"] | order(order asc){state, stateCode, doctor, city, name, address, gbpUrl, bookingUrl}`
   );
   if (!docs || !docs.length) return locationStates;
 
@@ -322,6 +323,7 @@ export async function getClinicStates(): Promise<LocationState[]> {
       address: c.address || "",
       gbpUrl:
         c.gbpUrl || CODE_GBP.get(`${c.city || ""}|${c.name || ""}`.toLowerCase()),
+      bookingUrl: c.bookingUrl || undefined,
     });
   }
   return [...groups.values()].sort((a, b) => {

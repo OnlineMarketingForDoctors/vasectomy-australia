@@ -19,6 +19,8 @@ export type Clinic = {
   address: string;
   /** Exact Google Business listing URL; falls back to a Maps search when absent. */
   gbpUrl?: string;
+  /** Timely booking URL for this clinic; falls back to the site-wide one. */
+  bookingUrl?: string;
 };
 
 export type LocationState = {
